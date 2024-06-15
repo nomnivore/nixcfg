@@ -1,4 +1,6 @@
-# https://github.com/LGUG2Z/nixos-wsl-starter/blob/master/flake.nix
+# flake.nix
+
+# ref https://github.com/LGUG2Z/nixos-wsl-starter/blob/master/flake.nix
 
 {
   description = "My nix configuration";
@@ -22,6 +24,12 @@
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    # neovim-cfg = {
+    #   url = "github:nomnivore/nvim";
+    #   flake = false;
+    # };
+
   };
 
   outputs = inputs:
@@ -33,12 +41,12 @@
 
         config = {
           allowUnfree = true;
-          permittedInsecurePackages = [];
+          permittedInsecurePackages = [ ];
         };
 
         overlays = [
           nur.overlay
-
+          neovim-nightly-overlay.overlays.default
           # inline: adds 'unstable' for more recent packages
           # ex: pkgs.unstable.vim
           (_final: prev: {
@@ -65,15 +73,17 @@
         };
       };
 
-      mkNixosConfiguration = {
-        system ? "x86_64-linux",
-        hostname,
-        username,
-        args ? {},
-        modules,
-      }: let
-        specialArgs = argDefaults // {inherit hostname username;} // args;
-      in
+      mkNixosConfiguration =
+        { system ? "x86_64-linux"
+        , hostname
+        , username
+        , args ? { }
+        , modules
+        ,
+        }:
+        let
+          specialArgs = argDefaults // { inherit hostname username; } // args;
+        in
         nixpkgs.lib.nixosSystem {
           inherit system specialArgs;
           pkgs = nixpkgsWithOverlays system;
@@ -83,7 +93,8 @@
           ]
           ++ modules;
         };
-    in {
+    in
+    {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
 
       nixosConfigurations.nixos = mkNixosConfiguration {
@@ -93,6 +104,10 @@
           nixos-wsl.nixosModules.wsl
           ./wsl.nix
         ];
+        args = { inherit neovim-nightly-overlay; };
+        # args = {
+        #   inherit neovim-cfg;
+        # };
       };
     };
 }

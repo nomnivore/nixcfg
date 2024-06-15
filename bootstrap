@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+setup_neovim() {
+  local TARGET_DIR="$HOME/.config/nvim"
+
+  local REPO_URL="https://github.com/nomnivore/nvim.git"
+
+  if [ -d "$TARGET_DIR/.git" ]; then
+    echo "Neovim config exists in $TARGET_DIR, pulling latest changes..."
+    git -C "$TARGET_DIR" pull --force
+  else
+    echo "Git repository not found in $TARGET_DIR, cloning repository..."
+    git clone "$REPO_URL" "$TARGET_DIR"
+  fi
+} 
+
+setup_neovim

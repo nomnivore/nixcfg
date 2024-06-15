@@ -13,6 +13,9 @@
   programs.zsh.enable = true;
   environment.shells = [ pkgs.zsh ];
 
+  # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.zsh.enableCompletion
+  environment.pathsToLink = [ "/share/zsh" ];
+
   environment.enableAllTerminfo = true;
 
   security.sudo.wheelNeedsPassword = false;
@@ -123,5 +126,9 @@
 
   environment.systemPackages = with pkgs; [
     xsel # clipboard integration
+    coreutils
+    git
+    nodejs
+    python3
   ];
 }
