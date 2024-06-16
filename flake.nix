@@ -50,10 +50,44 @@
           # inline: adds 'unstable' for more recent packages
           # ex: pkgs.unstable.vim
           (_final: prev: {
-            unstable = import nixpkgs-unstable {
-              inherit (prev) system;
-              inherit config;
-            };
+            unstable = import nixpkgs-unstable
+              {
+                inherit (prev) system;
+                inherit config;
+
+                overlays = prev.overlays ++ [
+                  (self: super: {
+                    bunLatest = prev.bun.overrideAttrs
+                      (final: bprev: rec {
+                        version = "1.1.13";
+                        src = passthru.sources.${prev.stdenvNoCC.hostPlatform.system} or (throw "Unsupported system: ${prev.stdenvNoCC.hostPlatform.system}");
+                        passthru = bprev.passthru // {
+                          sources = bprev.passthru.sources // {
+                            "x86_64-linux" = prev.fetchurl {
+                              url = "https://github.com/oven-sh/bun/releases/download/bun-v${version}/bun-linux-x64.zip";
+                              hash = "sha256-QC6dsWjRYiuBIojxPvs8NFMSU6ZbXbZ9Q/+u+45NmPc=";
+                            };
+                          };
+                        };
+                      });
+                  })
+                ];
+              };
+            bunLatest = prev.bun.overrideAttrs
+              (final: bprev: rec {
+                version = "1.1.13";
+                src = passthru.sources.${prev.stdenvNoCC.hostPlatform.system} or (throw "Unsupported system: ${prev.stdenvNoCC.hostPlatform.system}");
+                passthru = bprev.passthru // {
+                  sources = bprev.passthru.sources // {
+                    "x86_64-linux" = prev.fetchurl {
+                      url = "https://github.com/oven-sh/bun/releases/download/bun-v${version}/bun-linux-x64.zip";
+                      hash = "sha256-QC6dsWjRYiuBIojxPvs8NFMSU6ZbXbZ9Q/+u+45NmPc=";
+                    };
+                  };
+                };
+              });
+
+
           })
         ];
       });

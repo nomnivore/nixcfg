@@ -36,7 +36,8 @@ let
 
     # programming languages
     nodejs_22
-    bun
+    go
+    bunLatest
   ];
 
   stable-packages = with pkgs; [
