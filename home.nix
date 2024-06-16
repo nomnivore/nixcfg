@@ -37,7 +37,6 @@ let
     # programming languages
     nodejs_22
     go
-    bunLatest
   ];
 
   stable-packages = with pkgs; [
@@ -64,7 +63,8 @@ in
     ++
     # other packages that don't fit in the above lists
     [
-      pkgs.cowsay # TODO: remove
+      # from my own overlays in ./flake.nix
+      pkgs.bun-latest
     ];
 
   programs = {
