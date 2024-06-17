@@ -29,35 +29,37 @@
     #   url = "github:nomnivore/nvim";
     #   flake = false;
     # };
-
   };
 
-  outputs = inputs:
-    with inputs; let
+  outputs =
+    inputs:
+    with inputs;
+    let
       #TODO: secrets
       # secrets = builtins.fromJSON (builtins.readFile ./secrets.json);
-      nixpkgsWithOverlays = system: (import nixpkgs rec {
-        inherit system;
+      nixpkgsWithOverlays =
+        system:
+        (import nixpkgs rec {
+          inherit system;
 
-        config = {
-          allowUnfree = true;
-          permittedInsecurePackages = [ ];
-        };
+          config = {
+            allowUnfree = true;
+            permittedInsecurePackages = [ ];
+          };
 
-        overlays = [
-          nur.overlay
-          neovim-nightly-overlay.overlays.default
-          # inline: adds 'unstable' for more recent packages
-          # ex: pkgs.unstable.vim
-          (_final: prev: {
-            unstable = import nixpkgs-unstable
-              {
+          overlays = [
+            nur.overlay
+            neovim-nightly-overlay.overlays.default
+            # inline: adds 'unstable' for more recent packages
+            # ex: pkgs.unstable.vim
+            (_final: prev: {
+              unstable = import nixpkgs-unstable {
                 inherit (prev) system;
                 inherit config;
               };
-          })
-        ];
-      });
+            })
+          ];
+        });
 
       configurationDefaults = args: {
         home-manager.useGlobalPkgs = true;
@@ -75,12 +77,12 @@
       };
 
       mkNixosConfiguration =
-        { system ? "x86_64-linux"
-        , hostname
-        , username
-        , args ? { }
-        , modules
-        ,
+        {
+          system ? "x86_64-linux",
+          hostname,
+          username,
+          args ? { },
+          modules,
         }:
         let
           specialArgs = argDefaults // { inherit hostname username; } // args;
@@ -91,8 +93,7 @@
           modules = [
             (configurationDefaults specialArgs)
             home-manager.nixosModules.home-manager
-          ]
-          ++ modules;
+          ] ++ modules;
         };
     in
     {
@@ -105,7 +106,9 @@
           nixos-wsl.nixosModules.wsl
           ./wsl.nix
         ];
-        args = { inherit neovim-nightly-overlay; };
+        args = {
+          inherit neovim-nightly-overlay;
+        };
         # args = {
         #   inherit neovim-cfg;
         # };

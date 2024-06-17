@@ -24,9 +24,7 @@
       initExtraBeforeCompInit = builtins.readFile ./zsh/p10k_instant_prompt.zsh;
       oh-my-zsh = {
         enable = true;
-        plugins = [
-          "z"
-        ];
+        plugins = [ "z" ];
         extraConfig = ''
           zstyle ':completion:*' menu select
         '';
@@ -34,10 +32,9 @@
     };
   };
 
-  home.shellAliases =
-    {
-      rebuild = "sudo nixos-rebuild switch --flake ~/nixcfg";
-      win = "powershell.exe";
-      ls = "lsd";
-    };
+  home.shellAliases = {
+    rebuild = "sudo nixos-rebuild switch --flake ~/nixcfg";
+    win = "powershell.exe";
+    ls = "lsd";
+  };
 }

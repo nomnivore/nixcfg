@@ -1,21 +1,26 @@
-{ config
-, pkgs
-, lib
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  ...
 }:
 let
-  bunOverlay = (final: prev: rec {
-    version = "1.1.13";
-    src = passthru.sources.${pkgs.stdenvNoCC.hostPlatform.system} or (throw "Unsupported system: ${pkgs.stdenvNoCC.hostPlatform.system}");
-    passthru = prev.passthru // {
-      sources = prev.passthru.sources // {
-        "x86_64-linux" = pkgs.fetchurl {
-          url = "https://github.com/oven-sh/bun/releases/download/bun-v${version}/bun-linux-x64.zip";
-          hash = "sha256-QC6dsWjRYiuBIojxPvs8NFMSU6ZbXbZ9Q/+u+45NmPc=";
+  bunOverlay = (
+    final: prev: rec {
+      version = "1.1.13";
+      src =
+        passthru.sources.${pkgs.stdenvNoCC.hostPlatform.system}
+          or (throw "Unsupported system: ${pkgs.stdenvNoCC.hostPlatform.system}");
+      passthru = prev.passthru // {
+        sources = prev.passthru.sources // {
+          "x86_64-linux" = pkgs.fetchurl {
+            url = "https://github.com/oven-sh/bun/releases/download/bun-v${version}/bun-linux-x64.zip";
+            hash = "sha256-QC6dsWjRYiuBIojxPvs8NFMSU6ZbXbZ9Q/+u+45NmPc=";
+          };
         };
       };
-    };
-  });
+    }
+  );
 in
 {
   options = {
@@ -38,13 +43,9 @@ in
     home.packages =
       if config.lang.bun.enable then
         if config.lang.bun.useOverlay then
-          with pkgs; [
-            (bun.overrideAttrs bunOverlay)
-          ]
+          with pkgs; [ (bun.overrideAttrs bunOverlay) ]
         else
-          with pkgs; [
-            unstable.bun
-          ]
+          with pkgs; [ unstable.bun ]
       else
         [ ];
   };

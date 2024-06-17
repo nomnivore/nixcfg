@@ -1,11 +1,12 @@
 {
   # secrets,
-  username
-, hostname
-, pkgs
-, inputs
-, ...
-}: {
+  username,
+  hostname,
+  pkgs,
+  inputs,
+  ...
+}:
+{
   time.timeZone = "America/Detroit";
   networking.hostName = "${hostname}";
 
@@ -26,7 +27,10 @@
   users.users.${username} = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "docker" ];
+    extraGroups = [
+      "wheel"
+      "docker"
+    ];
 
     # FIXME: add password
     # hashedPassword = "";
@@ -35,15 +39,12 @@
   };
 
   home-manager.users.${username} = {
-    imports = [
-      ./home.nix
-    ];
+    imports = [ ./home.nix ];
   };
 
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11";
-
 
   wsl = {
     enable = true;
@@ -98,7 +99,6 @@
       # FIXME: the overlays-compat trick doesn't work at all for me.
       "nixpkgs-overlays=${toString ./overlays-compat}"
     ];
-
 
     package = pkgs.nixFlakes;
     extraOptions = ''experimental-features = nix-command flakes'';

@@ -1,11 +1,11 @@
 # home.nix
 {
   # secrets,
-  pkgs
-, username
-, nix-index-database
-, config
-, ...
+  pkgs,
+  username,
+  nix-index-database,
+  config,
+  ...
 }:
 let
   unstable-packages = with pkgs.unstable; [
@@ -44,7 +44,7 @@ let
     # packages that are less likely to break with updates / version-conflict
     gh
     nil # nix language server
-    nixpkgs-fmt # nix formatter
+    nixfmt-rfc-style # nix formatter
 
     # stuff needed to make neovim config work
     gcc # c compiler
@@ -65,24 +65,20 @@ in
   home.packages =
     stable-packages
     ++ unstable-packages
-    ++
-    [
+    ++ [
       # other packages that don't fit in the above lists
       # must be explicit (e.g. `pkgs.gh` instead of `gh`)
     ];
 
-  programs =
-    {
-      home-manager.enable = true;
-      nix-index.enable = true;
-      nix-index.enableZshIntegration = true;
-      nix-index-database.comma.enable = true;
-    };
-
+  programs = {
+    home-manager.enable = true;
+    nix-index.enable = true;
+    nix-index.enableZshIntegration = true;
+    nix-index-database.comma.enable = true;
+  };
 
   home.file.".config/nix/bootstrap" = {
     source = ./bootstrap;
     executable = true;
   };
-
 }
