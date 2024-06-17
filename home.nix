@@ -17,7 +17,6 @@ let
     # cli tools
     wget
     vim
-    git
     curl
     unzip
     ripgrep
@@ -42,9 +41,10 @@ let
 
   stable-packages = with pkgs; [
     # packages that are less likely to break with updates / version-conflict
-    gh
     nil # nix language server
     nixfmt-rfc-style # nix formatter
+
+    xdg-utils
 
     # stuff needed to make neovim config work
     gcc # c compiler
@@ -75,6 +75,24 @@ in
     nix-index.enable = true;
     nix-index.enableZshIntegration = true;
     nix-index-database.comma.enable = true;
+
+    # TODO: setup gpg
+    # probably needs secrets management
+    # otherwise creating/setting keys will need to be manual
+    git = {
+      enable = true;
+      package = pkgs.unstable.git;
+      userName = "nomnivore";
+      userEmail = "6979410+nomnivore@users.noreply.github.com";
+    };
+    gh = {
+      enable = true;
+      package = pkgs.gh;
+      gitCredentialHelper.enable = true;
+      settings = {
+        git_protocol = "https";
+      };
+    };
   };
 
   home.file.".config/nix/bootstrap" = {
