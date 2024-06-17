@@ -31,9 +31,13 @@ let
     walk
     nnn
 
-    # programming languages
+    # programming languages/toolkits
+    # bun is in 'modules'
     nodejs_22
+    pnpm
     go
+    rustup
+    gleam
   ];
 
   stable-packages = with pkgs; [
