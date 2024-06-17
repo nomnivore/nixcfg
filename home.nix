@@ -53,6 +53,8 @@ in
 {
   imports = [
     nix-index-database.hmModules.nix-index
+
+    ./modules/bun.nix
   ];
 
   home.stateVersion = "23.11";
@@ -63,8 +65,7 @@ in
     ++
     # other packages that don't fit in the above lists
     [
-      # from my own overlays in ./flake.nix
-      pkgs.bun-latest
+      pkgs.cowsay # TODO: remove
     ];
 
   programs = {
