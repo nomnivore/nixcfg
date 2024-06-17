@@ -5,9 +5,6 @@
 , username
 , nix-index-database
 , config
-, lib
-, neovim-nightly-overlay
-  # , neovim-cfg
 , ...
 }:
 let
@@ -54,11 +51,7 @@ in
   imports = [
     nix-index-database.hmModules.nix-index
 
-    # adds the `bun` package and allows for explicit versioning
-    ./modules/bun.nix
-
-    ./modules/sh.nix
-    ./modules/neovim.nix
+    ./modules/default.nix
   ];
 
   home.stateVersion = "23.11";
