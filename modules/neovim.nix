@@ -22,16 +22,6 @@
   home.activation.setup-neovim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     PATH=$PATH:${lib.makeBinPath [ pkgs.git ]}
 
-    TARGET_DIR="$HOME/.config/nvim"
-
-    REPO_URL="https://github.com/nomnivore/nvim.git"
-
-    if [ -d "$TARGET_DIR/.git" ]; then
-      echo "Neovim config exists in $TARGET_DIR, pulling latest changes..."
-      run git -C "$TARGET_DIR" pull --force
-    else
-      echo "Git repository not found in $TARGET_DIR, cloning repository..."
-      run git clone "$REPO_URL" "$TARGET_DIR"
-    fi
+    ${builtins.readFile ../bootstrap}
   '';
 }
