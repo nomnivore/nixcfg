@@ -22,6 +22,12 @@ let
     ripgrep
     fd
     lsd
+    bat
+
+    # charm stuff
+    gum
+    glow
+    skate
 
     # tui apps
     lazygit
@@ -50,6 +56,10 @@ let
     gcc # c compiler
     pyenv
   ];
+
+  # this could be split into seperate files
+  # contained in modules, each containing setup related to their module
+  bootstrapScript = pkgs.writeShellScriptBin "bootstrap" (builtins.readFile ./bootstrap);
 in
 {
   imports = [
@@ -68,6 +78,7 @@ in
     ++ [
       # other packages that don't fit in the above lists
       # must be explicit (e.g. `pkgs.gh` instead of `gh`)
+      bootstrapScript
     ];
 
   programs = {
@@ -87,16 +98,17 @@ in
     };
     gh = {
       enable = true;
-      package = pkgs.gh;
+      package = pkgs.unstable.gh;
       gitCredentialHelper.enable = true;
       settings = {
         git_protocol = "https";
       };
+      extensions = with pkgs.unstable; [
+        gh-copilot # Copilot AI in the command line
+        gh-dash # GitHub Dashboard
+        gh-s # GitHub Search
+        gh-poi # Delete merged local branches
+      ];
     };
-  };
-
-  home.file.".config/nix/bootstrap" = {
-    source = ./bootstrap;
-    executable = true;
   };
 }
