@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 {
+  home.packages = with pkgs.unstable; [ zsh-powerlevel10k ];
+
   programs = {
     zsh = {
       enable = true;

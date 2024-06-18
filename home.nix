@@ -2,7 +2,6 @@
 {
   # secrets,
   pkgs,
-  username,
   nix-index-database,
   config,
   ...
@@ -12,7 +11,6 @@ let
     # core binaries/programs that will always be bleeding-edge
     # TODO: take programs from the wsl.nix file
     neofetch # hello world :)
-    zsh-powerlevel10k
 
     # cli tools
     wget
