@@ -70,9 +70,17 @@
 
       argDefaults = {
         #TODO: add secrets to this list
-        inherit inputs self nix-index-database;
+        inherit
+          inputs
+          self
+          nix-index-database
+          neovim-nightly-overlay
+          ;
         channels = {
           inherit nixpkgs nixpkgs-unstable;
+        };
+        vars = {
+          flakePath = "nixcfg"; # directory (within $HOME) where nix configuration is stored (this repo)
         };
       };
 
@@ -104,12 +112,6 @@
           nixos-wsl.nixosModules.wsl
           ./wsl.nix
         ];
-        args = {
-          inherit neovim-nightly-overlay;
-        };
-        # args = {
-        #   inherit neovim-cfg;
-        # };
       };
     };
 }
