@@ -6,7 +6,12 @@
 }:
 
 {
-  home.packages = with pkgs.unstable; [ zsh-powerlevel10k ];
+  # terminal apps may come from home.nix
+  # but anything referenced here should be defined here as well
+  home.packages = with pkgs.unstable; [
+    lsd
+    bat
+  ];
 
   programs = {
     fzf.enable = true;
@@ -14,23 +19,9 @@
     zsh = {
       enable = true;
       enableCompletion = true;
-      # autosuggestion.enable = true;
-      # syntaxHighlighting.enable = true;
 
       dotDir = ".config/zsh";
-      plugins = with pkgs; [
-        {
-          name = "powerlevel10k.zsh-theme";
-          file = "powerlevel10k.zsh-theme";
-          src = "${zsh-powerlevel10k}/share/zsh-powerlevel10k";
-        }
-        {
-          name = "powerlevel10k-config";
-          file = ".p10k-pure.zsh";
-          src = ./zsh;
-        }
-      ];
-      initExtraBeforeCompInit = builtins.readFile ./zsh/p10k_instant_prompt.zsh;
+
       antidote = {
         enable = true;
         useFriendlyNames = true;
@@ -49,11 +40,21 @@
       #   '';
       # };
     };
+
+    oh-my-posh = {
+      enable = true;
+      package = pkgs.unstable.oh-my-posh;
+      # useTheme = "pure";
+      settings = builtins.fromTOML (builtins.readFile ./zsh/omp-pure.toml);
+    };
   };
 
   home.shellAliases = {
     rebuild = "sudo nixos-rebuild switch --flake ~/${vars.flakePath}";
     win = "powershell.exe";
+    _ls = "ls";
     ls = "lsd";
+    _cat = "cat";
+    cat = "bat";
   };
 }

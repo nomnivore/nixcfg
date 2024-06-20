@@ -19,8 +19,6 @@ let
     unzip
     ripgrep
     fd
-    lsd
-    bat
 
     # charm stuff
     gum
