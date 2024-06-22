@@ -32,13 +32,10 @@
           "zsh-users/zsh-completions"
         ];
       };
-      # oh-my-zsh = {
-      #   enable = true;
-      #   plugins = [ "z" ];
-      #   extraConfig = ''
-      #     zstyle ':completion:*' menu select
-      #   '';
-      # };
+
+      initExtraBeforeCompInit = ''
+        zstyle ':completion:*' menu select
+      '';
     };
 
     oh-my-posh = {
@@ -52,9 +49,7 @@
   home.shellAliases = {
     rebuild = "sudo nixos-rebuild switch --flake ~/${vars.flakePath}";
     win = "powershell.exe";
-    _ls = "ls";
     ls = "lsd";
-    _cat = "cat";
     cat = "bat";
   };
 }

@@ -49,6 +49,77 @@ branch_icon = ''
 commit_icon = '@'
 fetch_status = true
 
+# language / tooling version segments
+
+[[blocks.segments]]
+type = "docker"
+style = "plain"
+foreground = "#2496ED"
+background = "transparent"
+template = " 󰡨 {{ .Context }}"
+
+[[blocks.segments]]
+type = "bun"
+style = "plain"
+foreground = "#F472B6"
+background = "transparent"
+# FIXME: bun doesn't have a logo icon... yet?
+template = " 🅱 {{ .Full }}"
+
+[[blocks.segments]]
+type = "node"
+style = "plain"
+foreground = "#6CA35E"
+background = "transparent"
+fetch_package_manager = true
+template = "  {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{end }}{{ .Full }}"
+
+[[blocks.segments]]
+type = "rust"
+style = "plain"
+foreground = "#0B7261"
+background = "transparent"
+template = "  {{ .Full }}"
+
+[[blocks.segments]]
+type = "go"
+style = "plain"
+foreground = "#00ADD8"
+background = "transparent"
+template = "  {{ .Full }}"
+
+[[blocks.segments]]
+type = "python"
+style = "plain"
+foreground = "#3572A5"
+background = "transparent"
+template = "  {{ .Full }}"
+
+# extras langs... might not ever need these
+
+[[blocks.segments]]
+type = "dotnet"
+style = "plain"
+foreground = "#512BD4"
+background = "transparent"
+template = " {{ .Full }}"
+
+[[blocks.segments]]
+type = "ruby"
+style = "plain"
+foreground = "#CC342D"
+background = "transparent"
+template = "  {{ .Full }}"
+
+[[blocks.segments]]
+type = "crystal"
+style = "plain"
+foreground = "#000100"      # possibly not readable
+background = "transparent"
+template = "  {{ .Full }}"
+
+# end language / tooling version segments
+
 [[blocks]]
 type = 'rprompt'
 overflow = 'hidden'
