@@ -17,6 +17,8 @@
     fzf.enable = true;
 
     atuin.enable = true;
+    zoxide.enable = true;
+    # zoxide.config = [ "--cmd cd" ]
 
     zsh = {
       enable = true;
@@ -28,7 +30,6 @@
         enable = true;
         useFriendlyNames = true;
         plugins = [
-          "agkozak/z"
           "zsh-users/zsh-autosuggestions"
           "zsh-users/zsh-syntax-highlighting"
           "zsh-users/zsh-completions"
