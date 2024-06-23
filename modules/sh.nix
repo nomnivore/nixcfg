@@ -16,6 +16,8 @@
   programs = {
     fzf.enable = true;
 
+    atuin.enable = true;
+
     zsh = {
       enable = true;
       enableCompletion = true;

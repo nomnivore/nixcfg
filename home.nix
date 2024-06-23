@@ -28,7 +28,6 @@ let
     # tui apps
     lazygit
     # TODO: pick a file manager
-    superfile
     walk
     nnn
 
