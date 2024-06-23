@@ -115,7 +115,6 @@
           specialArgs = argDefaults // { inherit username; } // args;
         in
         home-manager.lib.homeManagerConfiguration {
-          inherit system specialArgs; # do i need specialArgs here? i think they're only for nixos - with home-manager getting it from extraSpecialArgs
           pkgs = nixpkgsWithOverlays system;
           modules = [ (configurationDefaults specialArgs) ] ++ modules;
         };
