@@ -3,6 +3,7 @@
   # secrets,
   pkgs,
   nix-index-database,
+  username,
   config,
   ...
 }:
@@ -17,6 +18,7 @@ let
     vim
     curl
     unzip
+    zip
     ripgrep
     fd
 
@@ -62,6 +64,9 @@ in
 
     ./modules/default.nix
   ];
+
+  home.username = username;
+  home.homeDirectory = "/home/${username}";
 
   home.stateVersion = "23.11";
 

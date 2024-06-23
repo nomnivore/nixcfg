@@ -103,15 +103,38 @@
             home-manager.nixosModules.home-manager
           ] ++ modules;
         };
+
+      mkHomeConfiguration =
+        {
+          system ? "x86_64-linux",
+          username,
+          args ? { },
+          modules,
+        }:
+        let
+          specialArgs = argDefaults // { inherit username; } // args;
+        in
+        home-manager.lib.homeManagerConfiguration {
+          inherit system specialArgs; # do i need specialArgs here? i think they're only for nixos - with home-manager getting it from extraSpecialArgs
+          pkgs = nixpkgsWithOverlays system;
+          modules = [ (configurationDefaults specialArgs) ] ++ modules;
+        };
     in
     {
       nixosConfigurations.nixos = mkNixosConfiguration {
+        # config for my WSL2 setup
         hostname = "nixos";
         username = "kyle";
         modules = [
           nixos-wsl.nixosModules.wsl
           ./wsl.nix
         ];
+      };
+
+      homeConfigurations.kyle = mkHomeConfiguration {
+        # config for standalone nix running on other distros (using home-manager)
+        username = "kyle";
+        modules = [ ./home.nix ];
       };
     };
 }
