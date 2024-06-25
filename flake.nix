@@ -116,7 +116,8 @@
         in
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgsWithOverlays system;
-          modules = [ (configurationDefaults specialArgs) ] ++ modules;
+          extraSpecialArgs = specialArgs;
+          modules = modules;
         };
     in
     {
