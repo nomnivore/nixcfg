@@ -1,6 +1,11 @@
 # my nixos config
 
-Despite the generalized documentation, this configuration is built and maintained only for my personal use.
+Despite the generalized documentation, this configuration is built and
+maintained only for my personal use.
+
+Not everything is done "the Nix way". However, Nix provides me with the ability
+to spin up my personal/development environments on any of my systems
+with minimal effort, whether NixOS, Debian/other, and WSL2 or bare metal.
 
 ## Installation
 
@@ -12,7 +17,8 @@ These instructions should be roughly the same for NixOS-WSL and pure NixOS.
 
 ##### WSL2
 
-Download and import a NixOS tarball into WSL2. I used [this one](https://github.com/LGUG2Z/nixos-wsl-starter/releases) but I think it's also possible to [build your own](https://nix-community.github.io/NixOS-WSL/building.html).
+Download and import a NixOS tarball into WSL2.
+I used [this one](https://github.com/LGUG2Z/nixos-wsl-starter/releases) but I think it's also possible to [build your own](https://nix-community.github.io/NixOS-WSL/building.html).
 
 ```sh
 wsl --import <distro-name> <install-path> <tarball-path>
