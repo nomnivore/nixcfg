@@ -40,7 +40,7 @@
   };
 
   home-manager.users.${username} = {
-    imports = [ ./home.nix ];
+    imports = [ ../users/kyle/home.nix ];
   };
 
   # Before changing this value read the documentation for this option
@@ -105,7 +105,7 @@
       "nixos-config=/etc/nixos/configuration.nix"
       "/nix/var/nix/profiles/per-user/root/channels"
       # FIXME: the overlays-compat trick doesn't work at all for me.
-      "nixpkgs-overlays=${toString ./overlays-compat}"
+      "nixpkgs-overlays=${toString ../overlays-compat}"
     ];
 
     package = pkgs.nixFlakes;

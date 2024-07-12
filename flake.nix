@@ -127,14 +127,14 @@
         username = "kyle";
         modules = [
           nixos-wsl.nixosModules.wsl
-          ./wsl.nix
+          ./hosts/wsl.nix
         ];
       };
 
       homeConfigurations.kyle = mkHomeConfiguration {
         # config for standalone nix running on other distros (using home-manager)
         username = "kyle";
-        modules = [ ./home.nix ];
+        modules = [ ./users/kyle/home.nix ];
       };
     };
 }

@@ -56,13 +56,13 @@ let
 
   # this could be split into seperate files
   # contained in modules, each containing setup related to their module
-  bootstrapScript = pkgs.writeShellScriptBin "bootstrap" (builtins.readFile ./bootstrap);
+  bootstrapScript = pkgs.writeShellScriptBin "bootstrap" (builtins.readFile ../../bootstrap);
 in
 {
   imports = [
     nix-index-database.hmModules.nix-index
 
-    ./modules/default.nix
+    ../../home-modules/default.nix
   ];
 
   home.username = username;
