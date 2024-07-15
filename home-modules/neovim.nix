@@ -11,6 +11,9 @@
     enable = true;
     defaultEditor = true;
     package = neovim-nightly-overlay.packages.${pkgs.system}.default;
+
+    vimAlias = true;
+    vimdiffAlias = true;
   };
 
   # fetch my configuration
