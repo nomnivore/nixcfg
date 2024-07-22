@@ -39,6 +39,12 @@ Switch to the new configuration:
 sudo nixos-rebuild switch --flake .#nixos
 ```
 
+As an alternative, you can also use this command to build from the remote repo:
+
+```sh
+sudo nixos-rebuild switch --flake github:nomnivore/nixcfg#nixos
+```
+
 `#nixos` can be substituted with another flake output to build a different system, or omitted to match your system's hostname.
 
 **If you're on WSL2, you'll need to run these commands instead:**

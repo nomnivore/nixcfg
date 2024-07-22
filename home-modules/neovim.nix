@@ -20,8 +20,6 @@
   # allowing it to update itself (lazy.nvim)
   # and also allow easy local edits
 
-  # FIXME: this may need to be a derivation? not sure how it would work if offline.
-  # TODO: dedupe code with 'bootstrap' script
   home.activation.setup-neovim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     PATH=$PATH:${lib.makeBinPath [ pkgs.git ]}
 
