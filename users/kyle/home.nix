@@ -30,8 +30,8 @@ let
     # tui apps
     lazygit
     # TODO: pick a file manager
-    walk
     nnn
+    yazi
 
     # programming languages/toolkits
     # bun is in 'modules'
