@@ -37,7 +37,6 @@ jobs:
           GIT_COMMITTER_EMAIL: "actions@github.com"
 
       - name: Create a Pull Request
-        if: github.event_name == 'schedule'
         uses: peter-evans/create-pull-request@v4
         with:
           title: "Update flake.lock"
