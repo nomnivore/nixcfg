@@ -27,16 +27,24 @@ jobs:
           GIT_COMMITTER_NAME: "GitHub Actions"
           GIT_COMMITTER_EMAIL: "actions@github.com"
 
-      - name: Push changes
+      - name: Fetch latest changes from origin
+        run: git fetch origin
+
+      - name: Rebase update-flake branch onto main
         run: |
-          git push origin HEAD:refs/heads/update-flake
+          git checkout -B update-flake
+          git rebase origin/main
+
+      - name: Force push rebased branch
+        run: |
+          git push --force-with-lease origin update-flake
         env:
           GIT_AUTHOR_NAME: "GitHub Actions"
           GIT_AUTHOR_EMAIL: "actions@github.com"
           GIT_COMMITTER_NAME: "GitHub Actions"
           GIT_COMMITTER_EMAIL: "actions@github.com"
 
-      - name: Create a Pull Request
+      - name: Create or update Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
           title: "Update flake.lock"
