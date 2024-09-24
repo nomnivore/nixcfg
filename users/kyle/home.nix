@@ -104,6 +104,7 @@ in
         df = "diff";
         unstage = "reset HEAD --";
         last = "log -1 HEAD";
+        undo = "reset --soft HEAD^";
       };
 
       extraConfig = {
@@ -119,6 +120,10 @@ in
           "https://bitbucket.org/" = {
             insteadOf = "bb:";
           };
+        };
+        push = {
+          default = "current";
+          autoSetupRemote = "true";
         };
       };
     };
