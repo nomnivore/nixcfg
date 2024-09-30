@@ -9,5 +9,7 @@
 
     ./neovim.nix
     ./sh.nix
+
+    ./wezterm.nix
   ];
 }

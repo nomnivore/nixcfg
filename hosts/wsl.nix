@@ -54,6 +54,8 @@
     wslConf.network.generateHosts = true;
     defaultUser = username;
     startMenuLaunchers = true;
+    useWindowsDriver = true;
+    nativeSystemd = true;
 
     # enable integration with docker desktop
     # (for now, WSL:Ubuntu is taking care of this)
@@ -72,6 +74,10 @@
     enable = true;
     package = pkgs.nix-ld-rs;
   };
+
+  # hardware acceleration
+  # -- maybe works maybe doesn't?
+  hardware.opengl.enable = true;
 
   programs.nh = {
     enable = true;
