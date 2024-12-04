@@ -12,6 +12,27 @@ setup_neovim() {
     echo "Git repository not found in $TARGET_DIR, cloning repository..."
     git clone "$REPO_URL" "$TARGET_DIR"
   fi
-} 
+}
+
+# update neovim plugins
+update_neovim() {
+  if command -v neovim >/dev/null 2>&1; then
+    echo "Updating Neovim plugins via Lazy"
+    nvim --headless "+Lazy! sync" +qa
+  else
+    echo "nvim could not be found in PATH."
+  fi
+}
+
+update_rust() {
+  if command -v rustup >/dev/null 2>&1; then
+    echo "Updating Rust toolchain via rustup..."
+    rustup update
+  else
+    echo "rustup could not be found in PATH."
+  fi
+}
 
 setup_neovim
+update_neovim
+update_rust

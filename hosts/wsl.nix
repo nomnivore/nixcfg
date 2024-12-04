@@ -58,8 +58,7 @@
     nativeSystemd = true;
 
     # enable integration with docker desktop
-    # (for now, WSL:Ubuntu is taking care of this)
-    docker-desktop.enable = false;
+    docker-desktop.enable = true;
   };
 
   virtualisation.docker = {
@@ -117,8 +116,9 @@
     package = pkgs.nixFlakes;
     extraOptions = ''experimental-features = nix-command flakes'';
 
+    # disabled due to 'nh.clean.enable'
     gc = {
-      automatic = true;
+      automatic = false;
       options = "--delete-older-than 14d";
     };
   };
