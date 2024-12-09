@@ -23,17 +23,17 @@ in
   # allowing it to update itself (lazy.nvim)
   # and also allow easy local edits
 
-  home.activation.setup-neovim =
-    with pkgs;
-    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      PATH=$PATH:${
-        lib.makeBinPath [
-          git
-          unstable.rustup
-          neovim-pkg
-        ]
-      }
-
-      ${builtins.readFile ../bootstrap}
-    '';
+  # home.activation.setup-neovim =
+  #   with pkgs;
+  #   lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  #     PATH=$PATH:${
+  #       lib.makeBinPath [
+  #         git
+  #         unstable.rustup
+  #         neovim-pkg
+  #       ]
+  #     }
+  #
+  #     ${builtins.readFile ../bootstrap}
+  #   '';
 }
