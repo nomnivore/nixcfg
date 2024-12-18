@@ -16,7 +16,7 @@ setup_neovim() {
 
 # update neovim plugins
 update_neovim() {
-  if command -v neovim >/dev/null 2>&1; then
+  if command -v nvim >/dev/null 2>&1; then
     echo "Updating Neovim plugins via Lazy"
     nvim --headless "+Lazy! sync" +qa
   else
