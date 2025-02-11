@@ -54,6 +54,7 @@
     win = "powershell.exe";
     ls = "lsd";
     cat = "bat";
+    update-os = "( cd ~/${vars.flakePath} && git pull && nh os switch )";
 
     # this should be isolated in its own wsl-only module
     # but since WSL is my only machine rn, its ok
