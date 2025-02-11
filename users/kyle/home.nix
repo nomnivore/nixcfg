@@ -136,10 +136,33 @@ in
       };
       extensions = with pkgs.unstable; [
         gh-copilot # Copilot AI in the command line
-        gh-dash # GitHub Dashboard
+
+        # Managed below
+        # gh-dash # GitHub Dashboard
+
         gh-s # GitHub Search
         gh-poi # Delete merged local branches
       ];
+    };
+
+    gh-dash = {
+      enable = true;
+      settings = {
+        prSections = [
+          {
+            title = "My PRs";
+            filters = "is:open author:@me";
+          }
+          {
+            title = "Involved";
+            filters = "is:open involves:@me -author:@me";
+          }
+          {
+            title = "\/nixcfg";
+            filters = "is:open repo:nomnivore/nixcfg";
+          }
+        ];
+      };
     };
 
     direnv = {
