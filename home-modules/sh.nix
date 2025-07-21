@@ -59,5 +59,6 @@
     # this should be isolated in its own wsl-only module
     # but since WSL is my only machine rn, its ok
     winhome = "(cd /mnt/c; echo /mnt/c/Users/$(cmd.exe /c \"echo %USERNAME%\" | tr -d \"\r\") )";
+    wslsurf = "windsurf --remote wsl+nixos $1";
   };
 }

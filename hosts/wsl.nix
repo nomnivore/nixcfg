@@ -55,7 +55,7 @@
     defaultUser = username;
     startMenuLaunchers = true;
     useWindowsDriver = true;
-    nativeSystemd = true;
+    # nativeSystemd = true; # systemd is now default
 
     # enable integration with docker desktop
     docker-desktop.enable = true;
@@ -113,7 +113,7 @@
       "nixpkgs-overlays=${toString ../overlays-compat}"
     ];
 
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
     extraOptions = ''experimental-features = nix-command flakes'';
 
     # disabled due to 'nh.clean.enable'

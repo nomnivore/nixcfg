@@ -56,11 +56,11 @@ let
 
   # this could be split into seperate files
   # contained in modules, each containing setup related to their module
-  bootstrapScript = pkgs.writeShellScriptBin "bootstrap" (builtins.readFile ../../bootstrap);
+  bootstrapScript = pkgs.writeShellScriptBin "bootstrap" (builtins.readFile ../../bin/bootstrap);
 in
 {
   imports = [
-    nix-index-database.hmModules.nix-index
+    nix-index-database.homeModules.nix-index
 
     ../../home-modules/default.nix
   ];
