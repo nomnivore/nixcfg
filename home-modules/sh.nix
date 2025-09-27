@@ -9,8 +9,13 @@
   # terminal apps may come from home.nix
   # but anything referenced here should be defined here as well
   home.packages = with pkgs.unstable; [
+    # cli utils
     lsd
     bat
+
+    # terminal multiplexer
+    zellij
+
   ];
 
   programs = {
@@ -61,4 +66,7 @@
     winhome = "(cd /mnt/c; echo /mnt/c/Users/$(cmd.exe /c \"echo %USERNAME%\" | tr -d \"\r\") )";
     wslsurf = "windsurf --remote wsl+nixos $1";
   };
+
+  home.file.".config/zellij".source = ./zellij;
+
 }
