@@ -19,6 +19,10 @@ in
     vimdiffAlias = true;
   };
 
+  home.shellAliases = {
+    n = "nvim";
+  };
+
   # fetch my configuration
   # allowing it to update itself (lazy.nvim)
   # and also allow easy local edits

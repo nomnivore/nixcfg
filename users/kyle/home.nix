@@ -11,7 +11,10 @@ let
   unstable-packages = with pkgs.unstable; [
     # core binaries/programs that will always be bleeding-edge
     # TODO: take programs from the wsl.nix file
-    neofetch # hello world :)
+    fastfetch # hello world :)
+
+    # terminal multiplexer
+    zellij
 
     # cli tools
     wget
@@ -21,6 +24,7 @@ let
     zip
     ripgrep
     fd
+    gemini-cli
 
     # charm stuff
     gum
@@ -35,7 +39,7 @@ let
 
     # programming languages/toolkits
     # bun is in 'modules'
-    nodejs_22
+    nodejs_24
     pnpm
     go
     rustup

@@ -13,9 +13,6 @@
     lsd
     bat
 
-    # terminal multiplexer
-    zellij
-
   ];
 
   programs = {
