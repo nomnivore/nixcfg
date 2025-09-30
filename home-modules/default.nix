@@ -11,5 +11,11 @@
     ./sh.nix
 
     ./wezterm.nix
+
+    # new modules
+    ./packages.nix
+    ./git.nix
+    ./dev-tools.nix
+    ./cli-apps.nix
   ];
 }

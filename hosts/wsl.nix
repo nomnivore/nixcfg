@@ -40,7 +40,10 @@
   };
 
   home-manager.users.${username} = {
-    imports = [ ../users/kyle/home.nix ];
+    imports = [
+      ../users/kyle/home.nix
+      ../home-modules/wsl.nix
+    ];
   };
 
   # Before changing this value read the documentation for this option
@@ -76,7 +79,7 @@
 
   # hardware acceleration
   # -- maybe works maybe doesn't?
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 
   programs.nh = {
     enable = true;

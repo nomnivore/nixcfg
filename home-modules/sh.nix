@@ -2,11 +2,12 @@
   config,
   pkgs,
   vars,
+  lib,
   ...
 }:
 
 {
-  # terminal apps may come from home.nix
+  # terminal apps may come from packages.nix
   # but anything referenced here should be defined here as well
   home.packages = with pkgs.unstable; [
     # cli utils
@@ -38,7 +39,7 @@
         ];
       };
 
-      initExtraBeforeCompInit = ''
+      initContent = lib.mkOrder 550 ''
         zstyle ':completion:*' menu select
       '';
     };
@@ -57,11 +58,6 @@
     ls = "lsd";
     cat = "bat";
     update-os = "( cd ~/${vars.flakePath} && git pull && nh os switch )";
-
-    # this should be isolated in its own wsl-only module
-    # but since WSL is my only machine rn, its ok
-    winhome = "(cd /mnt/c; echo /mnt/c/Users/$(cmd.exe /c \"echo %USERNAME%\" | tr -d \"\r\") )";
-    wslsurf = "windsurf --remote wsl+nixos $1";
   };
 
   home.file.".config/zellij".source = ./zellij;
