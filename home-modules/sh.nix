@@ -7,7 +7,7 @@
 }:
 
 {
-  # terminal apps may come from packages.nix
+  # terminal apps may come from packages.nix, cli-tools.nix, etc.
   # but anything referenced here should be defined here as well
   home.packages = with pkgs.unstable; [
     # cli utils
