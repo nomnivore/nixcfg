@@ -101,7 +101,8 @@
           modules = [
             (configurationDefaults specialArgs)
             home-manager.nixosModules.home-manager
-          ] ++ modules;
+          ]
+          ++ modules;
         };
 
       mkHomeConfiguration =
@@ -128,6 +129,15 @@
         modules = [
           nixos-wsl.nixosModules.wsl
           ./hosts/wsl.nix
+        ];
+      };
+
+      nixosConfigurations.vbox = mkNixosConfiguration {
+        # config for a virtualbox setup
+        hostname = "vm";
+        username = "kyle";
+        modules = [
+          ./hosts/vbox
         ];
       };
 
