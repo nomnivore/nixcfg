@@ -20,6 +20,9 @@
 
     # set shell to zsh
     ../../modules/core/zsh.nix
+
+    # desktop environment
+    ../../modules/core/cosmic.nix
   ];
 
   time.timeZone = "America/Detroit";
