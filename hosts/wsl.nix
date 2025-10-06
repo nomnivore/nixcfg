@@ -4,13 +4,13 @@
   hostname,
   pkgs,
   inputs,
-  vars,
   ...
 }:
 {
 
   imports = [
     ../modules/core/nix-ld.nix
+    ../modules/core/nh.nix
   ];
 
   time.timeZone = "America/Detroit";
@@ -79,13 +79,6 @@
   # -- maybe works maybe doesn't?
   hardware.graphics.enable = true;
 
-  programs.nh = {
-    enable = true;
-    flake = "/home/${username}/${vars.flakePath}";
-    clean.enable = true;
-    clean.extraArgs = "--keep-since 4d --keep 3";
-  };
-
   nix = {
     settings = {
       trusted-users = [ username ];
@@ -117,9 +110,7 @@
     package = pkgs.nixVersions.stable;
     extraOptions = ''experimental-features = nix-command flakes'';
 
-    # disabled due to 'nh.clean.enable'
     gc = {
-      automatic = false;
       options = "--delete-older-than 14d";
     };
   };
