@@ -42,7 +42,7 @@
   ## home-manager entry
   home-manager.users.${username} = {
     imports = [
-      ../users/kyle/home.nix
+      ../../users/kyle/home.nix
     ];
   };
 }
