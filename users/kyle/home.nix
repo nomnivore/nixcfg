@@ -14,7 +14,7 @@ in
 {
   imports = [
     nix-index-database.homeModules.nix-index
-    ../../home-modules/default.nix
+    ../../modules/home
   ];
 
   home.username = username;
@@ -39,4 +39,3 @@ in
     # otherwise creating/setting keys will need to be manual
   };
 }
-

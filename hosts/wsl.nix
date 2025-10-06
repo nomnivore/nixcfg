@@ -8,6 +8,11 @@
   ...
 }:
 {
+
+  imports = [
+    ../modules/core/nix-ld.nix
+  ];
+
   time.timeZone = "America/Detroit";
   networking.hostName = "${hostname}";
 
@@ -42,7 +47,7 @@
   home-manager.users.${username} = {
     imports = [
       ../users/kyle/home.nix
-      ../home-modules/wsl.nix
+      ../modules/home/wsl.nix
     ];
   };
 
@@ -68,13 +73,6 @@
     enable = true;
     enableOnBoot = true;
     autoPrune.enable = true;
-  };
-
-  # allows dynamically linked libraries
-  # works better for vscode integration, but may interfere with other programs (?)
-  programs.nix-ld = {
-    enable = true;
-    package = pkgs.nix-ld-rs;
   };
 
   # hardware acceleration
