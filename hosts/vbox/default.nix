@@ -25,6 +25,8 @@
   time.timeZone = "America/Detroit";
   networking.hostName = "${hostname}";
 
+  system.stateVersion = "25.05";
+
   environment.enableAllTerminfo = true;
 
   security.sudo.wheelNeedsPassword = false;
@@ -37,6 +39,7 @@
   # bootloader
   boot.loader.limine = {
     enable = true;
+    biosDevice = "/dev/sda";
   };
 
   ## home-manager entry
