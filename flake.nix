@@ -134,7 +134,7 @@
 
       nixosConfigurations.vbox = mkNixosConfiguration {
         # config for a virtualbox setup
-        hostname = "vm";
+        hostname = "vbox";
         username = "kyle";
         modules = [
           ./hosts/vbox
