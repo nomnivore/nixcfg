@@ -34,6 +34,12 @@
     fsType = "ext4";
   };
 
+  # bootloader
+  boot.loader.limine = {
+    enable = true;
+  };
+
+  ## home-manager entry
   home-manager.users.${username} = {
     imports = [
       ../users/kyle/home.nix
