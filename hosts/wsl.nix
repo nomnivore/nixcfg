@@ -9,19 +9,20 @@
 {
 
   imports = [
+    ../modules/core/nix.nix
     ../modules/core/nix-ld.nix
     ../modules/core/nh.nix
+
+    # default user
+    ../modules/core/user.nix
+
+    # set shell to zsh
+    ../modules/core/zsh.nix
   ];
 
   time.timeZone = "America/Detroit";
   networking.hostName = "${hostname}";
 
-  # set shell to zsh
-  programs.zsh.enable = true;
-  environment.shells = [ pkgs.zsh ];
-
-  # https://nix-community.github.io/home-manager/options.xhtml#opt-programs.zsh.enableCompletion
-  environment.pathsToLink = [ "/share/zsh" ];
 
   environment.enableAllTerminfo = true;
 
@@ -29,20 +30,6 @@
 
   # enable ssh if needed
   # services.openssh.enable = true;
-
-  users.users.${username} = {
-    isNormalUser = true;
-    shell = pkgs.zsh;
-    extraGroups = [
-      "wheel"
-      "docker"
-    ];
-
-    # FIXME: add password
-    # hashedPassword = "";
-    # FIXME: add ssh public key
-    # openssh.authorizedKeys.keys = [ "ssh-rsa ..." ];
-  };
 
   home-manager.users.${username} = {
     imports = [
@@ -78,42 +65,6 @@
   # hardware acceleration
   # -- maybe works maybe doesn't?
   hardware.graphics.enable = true;
-
-  nix = {
-    settings = {
-      trusted-users = [ username ];
-      # FIXME: access tokens for github and gitlab
-      # access-tokens = [
-      #   "github.com=${secrets.github_token}"
-      #   "gitlab.com=OAuth2:${secrets.gitlab_token}"
-      # ];
-
-      accept-flake-config = true;
-      auto-optimise-store = true;
-    };
-
-    registry = {
-      nixpkgs = {
-        flake = inputs.nixpkgs;
-      };
-    };
-
-    nixPath = [
-      # prefer 'unstable' for nix-shell etc
-      "nixpkgs=${inputs.nixpkgs-unstable.outPath}"
-      "nixos-config=/etc/nixos/configuration.nix"
-      "/nix/var/nix/profiles/per-user/root/channels"
-      # FIXME: the overlays-compat trick doesn't work at all for me.
-      "nixpkgs-overlays=${toString ../overlays-compat}"
-    ];
-
-    package = pkgs.nixVersions.stable;
-    extraOptions = ''experimental-features = nix-command flakes'';
-
-    gc = {
-      options = "--delete-older-than 14d";
-    };
-  };
 
   environment.systemPackages = with pkgs; [
     xsel # clipboard integration
