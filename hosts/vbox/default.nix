@@ -42,7 +42,8 @@
   # bootloader
   boot.loader.limine = {
     enable = true;
-    biosDevice = "/dev/sda";
+    efiSupport = true;
+    biosSupport = false;
   };
 
   ## home-manager entry
