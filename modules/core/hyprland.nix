@@ -1,6 +1,7 @@
 { pkgs, ... }:
 
 {
+  services.displayManager.sddm.wayland.enable = true;
   programs.hyprland.enable = true;
 
   environment.systemPackages = with pkgs; [

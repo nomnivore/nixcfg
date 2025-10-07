@@ -22,7 +22,10 @@
     ../../modules/core/zsh.nix
 
     # desktop environment
+    # cosmic
     ../../modules/core/cosmic.nix
+    # hyprland
+    ../../modules/core/hyprland.nix
   ];
 
   time.timeZone = "America/Detroit";
