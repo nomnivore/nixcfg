@@ -63,6 +63,14 @@
     biosSupport = false;
   };
 
+  # wayland/virtio
+  environment.sessionVariables = {
+    WLR_RENDER_ALLOW_SOFTWARE = "1";
+  };
+  environment.systemPackages = with pkgs; [
+    virglrenderer
+  ];
+
   ## home-manager entry
   home-manager.users.${username} = {
     imports = [
