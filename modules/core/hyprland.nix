@@ -7,14 +7,9 @@
 
   # enable hyprland
   programs.hyprland.enable = true;
-  programs.hyprland.extraConfig = ''
-    # launcher
-    bind = SUPER, SPACE, exec, wofi --show drun
-  '';
 
   environment.systemPackages = with pkgs; [
     kitty # required for default hyprland config
-    wofi
   ];
 
   # hint Electron apps to use Wayland
