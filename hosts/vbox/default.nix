@@ -23,7 +23,7 @@
 
     # desktop environment
     # cosmic
-    ../../modules/core/cosmic.nix
+    # ../../modules/core/cosmic.nix
     # hyprland
     ../../modules/core/hyprland.nix
   ];
