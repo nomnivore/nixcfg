@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# nix shell wrapper that uses the global 'nixpkgs' flake reference.
+#
+# Usage:
+#   $0 pkg1 pkg2 ...       → interactive shell
+#   $0 pkg1 pkg2 -- cmd args → run command inside that shell
+
+set -euo pipefail
+
+if [ $# -eq 0 ]; then
+  echo "Usage: $0 <pkg1> [pkg2 ...] [-- <command>]"
+  exit 1
+fi
+
+# Split args at `--`
+pkgs=()
+cmd=()
+found_sep=0
+for arg in "$@"; do
+  if [ "$arg" = "--" ]; then
+    found_sep=1
+    continue
+  fi
+  if [ "$found_sep" -eq 0 ]; then
+    pkgs+=("$arg")
+  else
+    cmd+=("$arg")
+  fi
+done
+
+# Join package names with commas for the Nix attribute set syntax
+# e.g., 'hello,git,htop'
+pkg_expr=$(IFS=, ; echo "${pkgs[*]}")
+
+# Always use the global 'nixpkgs' flake input reference.
+flake_ref="nixpkgs"
+
+# Construct nix shell command
+# The syntax "${flake_ref}#{$pkg_expr}" injects the packages using the
+# `nix shell` attribute set syntax, e.g., 'nixpkgs#hello,git'.
+NIX_SHELL_COMMAND="nix shell ${flake_ref}#$pkg_expr"
+
+if [ ${#cmd[@]} -eq 0 ]; then
+  # Interactive shell
+  echo "Starting interactive shell with packages: ${pkgs[*]}"
+  exec $NIX_SHELL_COMMAND
+else
+  # Run a command within the environment
+  echo "Executing command '${cmd[*]}' with packages: ${pkgs[*]}"
+  # We must use '--command' before the command list
+  exec $NIX_SHELL_COMMAND --command "${cmd[@]}"
+fi

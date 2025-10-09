@@ -10,6 +10,7 @@ let
   # this could be split into seperate files
   # contained in modules, each containing setup related to their module
   bootstrapScript = pkgs.writeShellScriptBin "bootstrap" (builtins.readFile ../../bin/bootstrap);
+  nixshellScript = pkgs.writeShellScriptBin "ns" (builtins.readFile ../../bin/ns);
 in
 {
   imports = [
@@ -26,6 +27,7 @@ in
 
   home.packages = [
     bootstrapScript
+    nixshellScript
   ];
 
   programs = {

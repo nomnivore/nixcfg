@@ -9,7 +9,8 @@
   programs.hyprland.enable = true;
 
   environment.systemPackages = with pkgs; [
-    kitty # required for default hyprland config
+    foot
+    wofi
   ];
 
   # hint Electron apps to use Wayland

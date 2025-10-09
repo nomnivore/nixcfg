@@ -28,8 +28,6 @@
     nixPath = [
       # prefer 'unstable' for nix-shell etc
       "nixpkgs=${inputs.nixpkgs-unstable.outPath}"
-      "nixos-config=/etc/nixos/configuration.nix"
-      "/nix/var/nix/profiles/per-user/root/channels"
       # FIXME: the overlays-compat trick doesn't work at all for me.
       "nixpkgs-overlays=${toString ../../overlays-compat}"
     ];
