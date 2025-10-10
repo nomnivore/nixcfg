@@ -2,6 +2,7 @@
   username,
   hostname,
   pkgs,
+  config,
   ...
 }:
 
@@ -70,6 +71,9 @@
   environment.systemPackages = with pkgs; [
     virglrenderer
   ];
+
+  # enable hyprland
+  config.programs.hyprland.enable = true;
 
   ## home-manager entry
   home-manager.users.${username} = {

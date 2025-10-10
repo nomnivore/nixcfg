@@ -10,6 +10,9 @@
     ./packages.nix
     ./sh.nix
     ./wezterm.nix
+
+    # hyprland is disabled by default
+    # enable on host following @modules/core/hyprland.nix
+    ./hyprland
   ];
 }
-

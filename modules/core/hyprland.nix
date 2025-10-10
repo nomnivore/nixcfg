@@ -1,22 +1,44 @@
-{ pkgs, ... }:
-
 {
-  # display manager
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 
-  # enable hyprland
-  programs.hyprland.enable = true;
+with lib;
 
-  environment.systemPackages = with pkgs; [
-    foot
-    wofi
-  ];
+let
+  cfg = config.programs.hyprland;
+in
+{
+  options = {
+    programs.hyprland = {
+      enable = mkEnableOption "hyprland";
 
-  # hint Electron apps to use Wayland
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+      package = mkPackagesOption pkgs "hyprland";
 
-  hardware.opengl.enable = true;
-  services.xserver.enable = true;
-  services.xserver.xkb.layout = "us";
+    };
+  };
+
+  config = mkIf cfg.enable {
+    # display manager
+    services.displayManager.sddm.enable = true;
+    services.displayManager.sddm.wayland.enable = true;
+
+    # enable hyprland
+    programs.hyprland.enable = true;
+    programs.hyprland.packages = cfg.package;
+
+    environment.systemPackages = with pkgs; [
+      foot
+      wofi
+    ];
+
+    # hint Electron apps to use Wayland
+    environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+    hardware.opengl.enable = true;
+    services.xserver.enable = true;
+    services.xserver.xkb.layout = "us";
+  };
 }
