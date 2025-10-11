@@ -120,7 +120,7 @@ with lib;
             "border, 1, 5.39, easeOutQuint"
             "windows, 1, 4.79, easeOutQuint"
             "windowsIn, 1, 4.1, easeOutQuint, popin 87%"
-            "windowsOut, 1, 1.49, lienar, popin 87%"
+            "windowsOut, 1, 1.49, linear, popin 87%"
             "fadeIn, 1, 1.73, almostLinear"
             "fadeOut, 1, 1.46, almostLinear"
             "fade, 1, 3.03, quick"

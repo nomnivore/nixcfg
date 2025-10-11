@@ -15,7 +15,7 @@ with lib;
     modules.hyprland = {
       enable = mkEnableOption "hyprland";
 
-      package = mkPackageOption pkgs "hyprland";
+      package = mkPackageOption pkgs "hyprland" { };
 
     };
   };
@@ -38,7 +38,7 @@ with lib;
     # hint Electron apps to use Wayland
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-    hardware.opengl.enable = true;
+    hardware.graphics.enable = true;
     services.xserver.enable = true;
     services.xserver.xkb.layout = "us";
   };
