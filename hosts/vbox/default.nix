@@ -22,6 +22,9 @@
     # set shell to zsh
     ../../modules/core/zsh.nix
 
+    # styles
+    ../../modules/core/stylix.nix
+
     # desktop environment
     # cosmic
     # ../../modules/core/cosmic.nix

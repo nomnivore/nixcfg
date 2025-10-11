@@ -13,6 +13,10 @@
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # stylix
+    stylix.url = "github:nix-community/stylix";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
+
     # community packages
     nur.url = "github:nix-community/NUR";
 
@@ -25,10 +29,6 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    # neovim-cfg = {
-    #   url = "github:nomnivore/nvim";
-    #   flake = false;
-    # };
   };
 
   outputs =
@@ -137,6 +137,7 @@
         hostname = "vbox";
         username = "kyle";
         modules = [
+          stylix.nixosModules.stylix
           ./hosts/vbox
         ];
       };
