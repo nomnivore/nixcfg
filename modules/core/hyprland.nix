@@ -8,11 +8,11 @@
 with lib;
 
 let
-  cfg = config.programs.hyprland;
+  cfg = config.modules.hyprland;
 in
 {
   options = {
-    programs.hyprland = {
+    modules.hyprland = {
       enable = mkEnableOption "hyprland";
 
       package = mkPackagesOption pkgs "hyprland";

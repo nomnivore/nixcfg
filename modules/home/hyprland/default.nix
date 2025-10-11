@@ -10,13 +10,13 @@
 with lib;
 
 let
-  cfg = config.hyprland;
+  cfg = config.modules.hyprland;
 
   # master toggle
   enable = osConfig.programs.hyprland.enable;
 in
 {
-  options.hyprland = {
+  options.modules.hyprland = {
 
   };
   imports =
@@ -26,7 +26,7 @@ in
       ./swayosd.nix
       ./waybar.nix
     ]);
-  config = mkIf osConfig.programs.hyprland.enable {
+  config = mkIf osConfig.modules.hyprland.enable {
 
     wayland.windowManager.hyprland = {
       enable = true;

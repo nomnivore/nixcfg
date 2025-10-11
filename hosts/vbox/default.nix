@@ -73,7 +73,7 @@
   ];
 
   # enable hyprland
-  config.programs.hyprland.enable = true;
+  modules.hyprland.enable = true;
 
   ## home-manager entry
   home-manager.users.${username} = {
