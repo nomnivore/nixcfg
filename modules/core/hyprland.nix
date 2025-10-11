@@ -15,7 +15,7 @@ with lib;
     modules.hyprland = {
       enable = mkEnableOption "hyprland";
 
-      package = mkPackagesOption pkgs "hyprland";
+      package = mkPackageOption pkgs "hyprland";
 
     };
   };
@@ -28,7 +28,7 @@ with lib;
     # enable hyprland
     programs.hyprland.enable = true;
     programs.hyprland.withUWSM = true;
-    programs.hyprland.packages = cfg.package;
+    programs.hyprland.package = cfg.package;
 
     environment.systemPackages = with pkgs; [
       foot
