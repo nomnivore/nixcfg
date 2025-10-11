@@ -24,8 +24,9 @@ with lib;
     [ ]
     # conditional imports
     ++ (optionals (enable) [
-      ./swayosd.nix
+      ./swayosd.nix # OSD for media keys
       ./waybar.nix
+      ./hyprpaper.nix # wallpaper
     ]);
   config = mkIf osConfig.modules.hyprland.enable {
 
