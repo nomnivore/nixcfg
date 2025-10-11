@@ -69,8 +69,8 @@ with lib;
           border_size = "1";
 
           # TODO: setup colorschemes
-          "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-          "col.inactive_border" = "rgba(595959aa)";
+          "col.active_border" = mkDefault "rgba(33ccffee) rgba(00ff99ee) 45deg";
+          "col.inactive_border" = mkDefault "rgba(595959aa)";
 
           # toggle to resize windows by clicking and dragging borders/gaps
           resize_on_border = "false";
@@ -91,7 +91,7 @@ with lib;
             enabled = "true";
             range = "4";
             render_power = "3";
-            color = "rgba(1a1a1aee)";
+            color = mkDefault "rgba(1a1a1aee)";
           };
 
           blur = {
