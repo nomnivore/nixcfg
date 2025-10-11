@@ -7,7 +7,6 @@
   lib,
   ...
 }:
-with lib;
 
 let
   cfg = config.modules.hyprland;
@@ -15,6 +14,8 @@ let
   # master toggle
   enable = osConfig.programs.hyprland.enable;
 in
+
+with lib;
 {
   options.modules.hyprland = {
 

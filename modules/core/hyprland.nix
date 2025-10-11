@@ -5,11 +5,11 @@
   ...
 }:
 
-with lib;
-
 let
   cfg = config.modules.hyprland;
 in
+
+with lib;
 {
   options = {
     modules.hyprland = {
