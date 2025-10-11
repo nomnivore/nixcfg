@@ -27,6 +27,7 @@ in
 
     # enable hyprland
     programs.hyprland.enable = true;
+    programs.hyprland.withUWSM = true;
     programs.hyprland.packages = cfg.package;
 
     environment.systemPackages = with pkgs; [
