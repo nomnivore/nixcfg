@@ -13,8 +13,8 @@
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # stylix
-    stylix.url = "github:nix-community/stylix";
+    # stylix - must be same as nixpkgs.url version
+    stylix.url = "github:nix-community/stylix/release-25.05";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
 
     # community packages
