@@ -30,6 +30,9 @@ with lib;
     ]);
   config = mkIf osConfig.modules.hyprland.enable {
 
+    # some default apps referenced in config
+    programs.foot.enable = true;
+
     wayland.windowManager.hyprland = {
       enable = true;
 

@@ -58,6 +58,7 @@
     ls = "lsd";
     cat = "bat";
     update-os = "( cd ~/${vars.flakePath} && git pull && nh os switch )";
+    nos = "nh os switch";
   };
 
   home.file.".config/zellij".source = ./zellij;
