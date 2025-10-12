@@ -25,7 +25,7 @@ with lib;
     # conditional imports
     ++ (optionals (enable) [
       ./swayosd.nix # OSD for media keys
-      ./waybar.nix
+      ./waybar
       ./hyprpaper.nix # wallpaper
     ]);
   config = mkIf osConfig.modules.hyprland.enable {
@@ -70,10 +70,6 @@ with lib;
           gaps_out = "10";
 
           border_size = "1";
-
-          # TODO: setup colorschemes
-          "col.active_border" = mkDefault "rgba(33ccffee) rgba(00ff99ee) 45deg";
-          "col.inactive_border" = mkDefault "rgba(595959aa)";
 
           # toggle to resize windows by clicking and dragging borders/gaps
           resize_on_border = "false";
