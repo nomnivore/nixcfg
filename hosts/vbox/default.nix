@@ -78,6 +78,7 @@
 
   # enable hyprland
   modules.hyprland.enable = true;
+  programs.firefox.enable = true;
 
   ## home-manager entry
   home-manager.users.${username} = {
