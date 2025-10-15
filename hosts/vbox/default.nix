@@ -83,8 +83,8 @@
     hyprland.enable = true;
 
     # use only one dm
-    modules.regreetd.enable = true;
-    # modules.sddm.enable = true;
+    regreetd.enable = true;
+    # sddm.enable = true;
   };
 
   programs.firefox.enable = true;
