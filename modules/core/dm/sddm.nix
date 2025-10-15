@@ -41,6 +41,7 @@ with lib;
     services.displayManager.sddm = {
       enable = true;
       wayland.enable = true;
+      package = pkgs.kdePackages.sddm;
 
       theme = mkIf (cfg.catppuccin-theme.enable) "catppuccin-${cfg.catppuccin-theme.flavor}-${cfg.catppuccin-theme.accent}";
     };
