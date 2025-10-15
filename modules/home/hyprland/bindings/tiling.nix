@@ -14,6 +14,7 @@
 
       bind = [
         "$mod, V, togglefloating,"
+        "$mod, F, fullscreen,"
         "$mod, P, pseudo," # dwindle
         "$mod, S, togglesplit," # dwindle
 
