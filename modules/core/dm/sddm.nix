@@ -30,7 +30,7 @@ with lib;
   config = mkIf cfg.enable {
 
     environment.systemPackages = optionals (cfg.catppuccin-theme.enable) [
-      (pkgs.catppuccin-sddm.override {
+      (pkgs.unstable.catppuccin-sddm.override {
         flavor = cfg.catppuccin-theme.flavor;
         accent = cfg.catppuccin-theme.accent;
         font = builtins.head config.fonts.fontconfig.defaultFonts.sansSerif;
