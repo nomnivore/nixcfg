@@ -83,8 +83,8 @@
     hyprland.enable = true;
 
     # use only one dm
-    regreetd.enable = true;
-    # sddm.enable = true;
+    # regreetd.enable = true; # 'cage' has issues with vbox, probably
+    sddm.enable = true;
   };
 
   programs.firefox.enable = true;
