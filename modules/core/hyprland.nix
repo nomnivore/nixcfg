@@ -11,12 +11,12 @@ in
 
 with lib;
 {
-  imports =
-    [ ]
-    ++ optionals (cfg.enable) [
-      # display manager
-      ./dm/regreetd.nix
-    ];
+  imports = [
+    # display manager
+    # TODO: these should get imported elsewhere, as they dont implicitly have a relationship with hyprland
+    ./dm/regreetd.nix
+    ./dm/sddm.nix
+  ];
 
   options = {
     modules.hyprland = {
