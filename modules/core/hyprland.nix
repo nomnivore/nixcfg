@@ -11,10 +11,21 @@ in
 
 with lib;
 {
-  imports = optionals (cfg.enable) [
-    # display manager
-    ./dm/regreetd.nix
-  ];
+  imports =
+    [ ]
+    ++ optionals (cfg.enable) [
+      # display manager
+      ./dm/regreetd.nix
+    ];
+
+  options = {
+    modules.hyprland = {
+      enable = mkEnableOption "hyprland";
+
+      package = mkPackageOption pkgs "hyprland" { };
+
+    };
+  };
 
   config = mkIf cfg.enable {
 

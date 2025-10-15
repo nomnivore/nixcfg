@@ -128,8 +128,6 @@
         username = "kyle";
         modules = [
           nixos-wsl.nixosModules.wsl
-          ./modules/core/options.nix
-
           ./hosts/wsl.nix
         ];
       };
@@ -140,8 +138,6 @@
         username = "kyle";
         modules = [
           stylix.nixosModules.stylix
-          ./modules/core/options.nix
-
           ./hosts/vbox
         ];
       };
