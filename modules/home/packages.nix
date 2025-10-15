@@ -12,6 +12,7 @@
     ]
     # Unstable packages
     ++ (with pkgs.unstable; [
+      # essential cli tools
       fastfetch
       wget
       vim
@@ -20,6 +21,7 @@
       zip
       ripgrep
       fd
+
       gemini-cli
       # charm stuff
       gum
