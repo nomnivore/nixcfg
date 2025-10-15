@@ -11,6 +11,13 @@ in
 
 with lib;
 {
+  imports =
+    [ ]
+    ++ optionals (cfg.enable) [
+      # display manager
+      ./dm/regreetd.nix
+    ];
+
   options = {
     modules.hyprland = {
       enable = mkEnableOption "hyprland";
@@ -21,9 +28,6 @@ with lib;
   };
 
   config = mkIf cfg.enable {
-    # display manager
-    services.displayManager.sddm.enable = true;
-    services.displayManager.sddm.wayland.enable = true;
 
     # enable hyprland
     programs.hyprland.enable = true;
