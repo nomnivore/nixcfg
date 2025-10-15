@@ -17,12 +17,12 @@ with lib;
       catppuccin-theme.flavor = mkOption {
         default = "mocha";
         example = "frappe";
-        type = types.string;
+        type = types.str;
       };
       catppuccin-theme.accent = mkOption {
         default = "mauve";
         example = "rose";
-        type = types.string;
+        type = types.str;
       };
     };
   };
