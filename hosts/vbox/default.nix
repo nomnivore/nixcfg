@@ -85,6 +85,11 @@
     # use only one dm
     # regreetd.enable = true; # 'cage' has issues with vbox, probably
     sddm.enable = true;
+    sddm.catppuccin-theme = {
+      enable = true;
+      flavor = "mocha";
+      accent = "mauve";
+    };
   };
 
   programs.firefox.enable = true;
