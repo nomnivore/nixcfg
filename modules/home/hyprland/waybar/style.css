@@ -1,121 +1,121 @@
-    /* General Bar Styling */
-    #waybar {
-        background-color: @base00; /* Default background */
-        color: @base05; /* Default text */
-        border-radius: 10px; /* Rounded corners for the bar itself */
-        min-height: 0;
-    }
+/* General Bar Styling */
+#waybar {
+  background-color: @base00; /* Default background */
+  color: @base05; /* Default text */
+  border-radius: 10px; /* Rounded corners for the bar itself */
+  min-height: 0;
+}
 
-    /* Base Styling for All Modules */
-    #waybar .modules-left > widget > * ,
-    #waybar .modules-center > widget > * ,
-    #waybar .modules-right > widget > * {
-        padding: 0 10px;
-        margin: 0;
-        border-radius: 8px; /* Slightly smaller rounded corners for modules */
-        background-color: @base01; /* Alternate background for modules */
-    }
+/* Base Styling for All Modules */
+#waybar .modules-left > widget > *,
+#waybar .modules-center > widget > *,
+#waybar .modules-right > widget > * {
+  padding: 0 10px;
+  margin: 0;
+  border-radius: 8px; /* Slightly smaller rounded corners for modules */
+  background-color: @base01; /* Alternate background for modules */
+}
 
-    /* 1. App Launcher Button (custom/launcher) */
-    #custom-launcher {
-        /* Dark text color widget: Item off background color (@base0D) */
-        background-color: @base0D;
-        /* Dark text color widget: Default text color (@base00) */
-        color: @base00; 
-        padding: 0 14px;
-        margin-left: 10px;
-        font-size: 16px;
-        font-weight: bold;
-    }
+/* 1. App Launcher Button (custom/launcher) */
+#custom-launcher {
+  /* Dark text color widget: Item off background color (@base0D) */
+  background-color: @base0D;
+  /* Dark text color widget: Default text color (@base00) */
+  color: @base00;
+  padding: 0 14px;
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
 
-    #custom-launcher:hover {
-        background-color: @base0E; /* Item on background color */
-    }
+#custom-launcher:hover {
+  background-color: @base0E; /* Item on background color */
+}
 
-    /* 2. Workspaces */
-    #workspaces {
-        background-color: transparent;
-        margin-left: 5px;
-        margin-right: 5px;
-    }
+/* 2. Workspaces */
+#workspaces {
+  background-color: transparent;
+  margin-left: 5px;
+  margin-right: 5px;
+}
 
-    #workspaces button {
-        background-color: @base01; /* Alternate background */
-        color: @base04; /* Alternate text for inactive */
-        padding: 0 10px 0 6px;
-        margin: 0 3px;
-        border-radius: 8px;
-    }
+#workspaces button {
+  background-color: @base01; /* Alternate background */
+  color: @base04; /* Alternate text for inactive */
+  padding: 0 10px 0 6px;
+  margin: 0 3px;
+  border-radius: 8px;
+}
 
-    /* Active workspace button */
-    #workspaces button.active {
-        background-color: @base03; /* List selected background */
-        color: @base07; /* Bright color for active state */
-    }
+/* Active workspace button */
+#workspaces button.active {
+  background-color: @base03; /* List selected background */
+  color: @base07; /* Bright color for active state */
+}
 
-    /* Urgent workspace button */
-    #workspaces button.urgent {
-        background-color: @base09; /* Urgent color */
-        color: @base00; /* Dark text for readability */
-    }
+/* Urgent workspace button */
+#workspaces button.urgent {
+  background-color: @base09; /* Urgent color */
+  color: @base00; /* Dark text for readability */
+}
 
-    #workspaces button:hover {
-        background-color: @base02; /* Selection background on hover */
-        box-shadow: none;
-    }
+#workspaces button:hover {
+  background-color: @base02; /* Selection background on hover */
+  box-shadow: none;
+}
 
-    /* 3. Active Window (Center) */
-    #window {
-        background-color: @base01; /* Alternate background */
-        color: @base05; /* Default text */
-        font-weight: bold;
-        font-style: italic;
-        padding: 0 15px;
-        margin: 0;
-    }
+/* 3. Active Window (Center) */
+#window {
+  background-color: transparent;
+  color: @base05; /* Default text */
+  font-weight: bold;
+  font-style: italic;
+  padding: 0 15px;
+  margin: 0;
+}
 
-    /* 4. Clock and general modules (Light text color widgets) */
-    #clock,
-    #cpu,
-    #memory,
-    #pulseaudio,
-    #network {
-        background-color: @base01;
-        color: @base05;
-    }
+/* 4. Clock and general modules (Light text color widgets) */
+#clock,
+#cpu,
+#memory,
+#pulseaudio,
+#network {
+  background-color: @base01;
+  color: @base05;
+}
 
-    /* 5. Battery Status */
-    #battery {
-        background-color: @base01;
-        color: @base0B; /* Use Green for good battery */
-    }
+/* 5. Battery Status */
+#battery {
+  background-color: @base01;
+  color: @base0B; /* Use Green for good battery */
+}
 
-    #battery.charging {
-        background-color: @base01;
-        color: @base0E; /* Item on background color (Purple) for charging */
-    }
+#battery.charging {
+  background-color: @base01;
+  color: @base0E; /* Item on background color (Purple) for charging */
+}
 
-    #battery.warning {
-        background-color: @base0A; /* Warning color */
-        color: @base00; /* Dark text for readability */
-    }
+#battery.warning {
+  background-color: @base0A; /* Warning color */
+  color: @base00; /* Dark text for readability */
+}
 
-    #battery.critical {
-        background-color: @base09; /* Urgent color */
-        color: @base00; /* Dark text for readability */
-    }
+#battery.critical {
+  background-color: @base09; /* Urgent color */
+  color: @base00; /* Dark text for readability */
+}
 
-    /* 6. Power/Logout Button (custom/power) */
-    #custom-power {
-        /* Dark text color widget: Error background color (@base08) */
-        background-color: @base08; 
-        /* Dark text color widget: Default text color (@base00) */
-        color: @base00;
-        padding: 0 14px;
-        margin-right: 10px;
-        font-size: 16px;
-    }
+/* 6. Power/Logout Button (custom/power) */
+#custom-power {
+  /* Dark text color widget: Error background color (@base08) */
+  background-color: @base08;
+  /* Dark text color widget: Default text color (@base00) */
+  color: @base00;
+  padding: 0 14px;
+  margin-right: 10px;
+  font-size: 16px;
+}
 
-    #custom-power:hover {
-        background-color: @base09; /* Urgent on hover */
-    }
+#custom-power:hover {
+  background-color: @base09; /* Urgent on hover */
+}
