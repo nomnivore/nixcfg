@@ -58,6 +58,7 @@
   };
   swapDevices = [
     { device = "/dev/sda2"; }
+    # { device = "/var/lib/swapfile"; size = 8*1024;}
   ];
 
   # bootloader
@@ -72,6 +73,7 @@
     WLR_RENDER_ALLOW_SOFTWARE = "1";
   };
   environment.systemPackages = with pkgs; [
+    coreutils
     xsel
     virglrenderer
   ];
