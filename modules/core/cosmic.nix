@@ -10,10 +10,12 @@ in
 with lib;
 {
   options = {
-    modules.cosmic = mkEnableOption "cosmic";
+    modules.cosmic = {
+      enable = mkEnableOption "cosmic";
+    };
   };
 
-  config = mkIf (cfg.enable) {
+  config = mkIf cfg.enable {
     # Enable the COSMIC login manager
     services.displayManager.cosmic-greeter.enable = true;
 
