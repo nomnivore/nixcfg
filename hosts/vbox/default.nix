@@ -12,34 +12,28 @@
     # generated using `nixos-generate-config --no-filesystems --show-hardware-config > ./hardware-configuration.nix`
     ./hardware-configuration.nix
 
-    ../../modules/core/nix.nix
-    ../../modules/core/nix-ld.nix
-    ../../modules/core/nh.nix
-
-    # default user
-    ../../modules/core/user.nix
-
-    # set shell to zsh
-    ../../modules/core/zsh.nix
-
-    # styles
-    ../../modules/core/stylix.nix
-
-    # desktop environment
-    # cosmic
-    # ../../modules/core/cosmic.nix
-    # hyprland
-    ../../modules/core/hyprland.nix
+    ../common.nix
   ];
 
-  time.timeZone = "America/Detroit";
-  networking.hostName = "${hostname}";
+  home-manager.users.${username} = {
+    imports = [
+      ../../users/kyle/home.nix
+    ];
+  };
 
-  system.stateVersion = "25.05";
+  # my options
+  modules = {
+    hyprland.enable = true;
 
-  environment.enableAllTerminfo = true;
-
-  security.sudo.wheelNeedsPassword = false;
+    # use only one dm
+    # regreetd.enable = true; # 'cage' has issues with vbox, probably
+    sddm.enable = true;
+    sddm.catppuccin-theme = {
+      enable = true;
+      flavor = "mocha";
+      accent = "mauve";
+    };
+  };
 
   # following the setup described here to create 3 partitions for UEFI
   # https://nixos.org/manual/nixos/stable/#sec-installation-manual-partitioning-UEFI
@@ -78,26 +72,7 @@
     virglrenderer
   ];
 
-  # my options
-  modules = {
-    hyprland.enable = true;
-
-    # use only one dm
-    # regreetd.enable = true; # 'cage' has issues with vbox, probably
-    sddm.enable = true;
-    sddm.catppuccin-theme = {
-      enable = true;
-      flavor = "mocha";
-      accent = "mauve";
-    };
-  };
-
   programs.firefox.enable = true;
 
-  ## home-manager entry
-  home-manager.users.${username} = {
-    imports = [
-      ../../users/kyle/home.nix
-    ];
-  };
+  system.stateVersion = "25.05";
 }

@@ -7,7 +7,7 @@
 
 with lib;
 {
-  config = mkIf (osConfig.stylix.enable) {
+  config = mkIf (osConfig.modules.stylix.enable) {
     stylix.targets = {
       waybar.addCss = false; # colors/fonts only
 

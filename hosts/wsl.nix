@@ -9,27 +9,9 @@
 {
 
   imports = [
-    ../modules/core/nix.nix
-    ../modules/core/nix-ld.nix
-    ../modules/core/nh.nix
+    ./common.nix
 
-    # default user
-    ../modules/core/user.nix
-
-    # set shell to zsh
-    ../modules/core/zsh.nix
   ];
-
-  time.timeZone = "America/Detroit";
-  networking.hostName = "${hostname}";
-
-
-  environment.enableAllTerminfo = true;
-
-  security.sudo.wheelNeedsPassword = false;
-
-  # enable ssh if needed
-  # services.openssh.enable = true;
 
   home-manager.users.${username} = {
     imports = [
@@ -38,9 +20,8 @@
     ];
   };
 
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11";
+  # my options
+  modules = { };
 
   wsl = {
     enable = true;
@@ -73,4 +54,6 @@
     nodejs
     python3
   ];
+
+  system.stateVersion = "23.11";
 }
