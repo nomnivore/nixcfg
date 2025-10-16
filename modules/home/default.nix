@@ -2,7 +2,7 @@
 
 {
   imports = [
-    # enabled modules
+    # /// Always-on modules ///
     ./bun.nix
     ./cli-apps.nix
     ./dev-tools.nix
@@ -12,11 +12,9 @@
     ./sh.nix
     ./wezterm.nix
 
-    # default disabled modules
+    # /// Optional modules ///
+    # // off by default //
     ./stylix.nix
-
-    # hyprland is disabled by default
-    # enable on host following @modules/core/hyprland.nix
     ./hyprland
   ];
 }
