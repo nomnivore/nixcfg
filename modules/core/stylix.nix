@@ -11,7 +11,7 @@ in
 with lib;
 {
 
-  options = lib.options {
+  options = {
     modules.stylix = {
       enable = mkEnableOption "stylix";
     };
