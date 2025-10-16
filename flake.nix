@@ -127,6 +127,8 @@
         hostname = "nixos";
         username = "kyle";
         modules = [
+          stylix.nixosModules.stylix
+
           nixos-wsl.nixosModules.wsl
           ./hosts/wsl.nix
         ];
