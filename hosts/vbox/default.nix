@@ -33,6 +33,8 @@
       flavor = "mocha";
       accent = "mauve";
     };
+    pipewire.enable = true;
+    networking.enable = true;
   };
 
   # following the setup described here to create 3 partitions for UEFI

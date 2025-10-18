@@ -14,6 +14,8 @@
 
     # /// Optional modules ///
     # // off by default //
+    ./pipewire.nix
+    ./networking.nix
     # styles
     ./stylix.nix
     # desktops
