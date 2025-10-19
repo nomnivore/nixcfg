@@ -16,7 +16,6 @@
   home-manager.users.${username} = {
     imports = [
       ../users/kyle/home.nix
-      ../modules/home/wsl.nix
 
       (
         { pkgs, ... }:
