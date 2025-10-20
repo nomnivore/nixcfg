@@ -34,11 +34,6 @@ with lib;
     programs.hyprland.withUWSM = true;
     programs.hyprland.package = cfg.package;
 
-    environment.systemPackages = with pkgs; [
-      foot
-      wofi
-    ];
-
     # hint Electron apps to use Wayland
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
 

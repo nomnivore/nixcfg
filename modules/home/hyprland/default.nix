@@ -34,6 +34,11 @@ with lib;
     # some default apps referenced in config
     programs.foot.enable = true;
 
+    programs.rofi = {
+      enable = true;
+      package = pkgs.rofi-wayland;
+    };
+
     wayland.windowManager.hyprland = {
       enable = true;
 
@@ -52,7 +57,7 @@ with lib;
         # TODO: manage this better
         "$terminal" = "foot";
         # "$fileManager" = "dolphin";
-        "$menu" = "wofi --term=$terminal --show drun";
+        "$menu" = "rofi -terminal=$terminal -show drun";
 
         # AUTOSTART
         exec-once = [
