@@ -6,6 +6,8 @@
     with pkgs; [
       nil # nix language server
       nixfmt-rfc-style # nix formatter
+      statix # nix linter
+
       xdg-utils
       gcc # c compiler
       pyenv
