@@ -37,5 +37,11 @@ with lib;
       };
       # emoji = {};
     };
+
+    stylix.cursor = {
+      package = pkgs.catppuccin-cursors.mochaDark;
+      name = "catppuccin-mocha-dark-cursors"; # /result/share/icons/???
+      size = 24;
+    };
   };
 }
