@@ -14,6 +14,7 @@
 
     # /// Optional modules ///
     # // off by default //
+    ./limine.nix
     ./pipewire.nix
     ./networking.nix
     # styles

@@ -23,6 +23,7 @@
 
   # my options
   modules = {
+    limine.enable = true;
     hyprland.enable = true;
     stylix.enable = true;
 
@@ -57,13 +58,6 @@
     { device = "/dev/sda2"; }
     # { device = "/var/lib/swapfile"; size = 8*1024;}
   ];
-
-  # bootloader
-  boot.loader.limine = {
-    enable = true;
-    efiSupport = true;
-    biosSupport = false;
-  };
 
   # wayland/virtio
   environment.sessionVariables = {
