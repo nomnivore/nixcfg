@@ -43,6 +43,15 @@ with lib;
       wayland.enable = true;
       package = pkgs.kdePackages.sddm;
 
+      # use kwin
+      wayland.compositor = "kwin";
+      extraPackages = with pkgs; [ kdePackages.kwin ];
+
+      # settings.Theme = {
+      #   CursorTheme = "catppuccin-mocha-dark-cursors";
+      #   CursorSize = 24;
+      # };
+      #
       theme = mkIf (cfg.catppuccin-theme.enable) "catppuccin-${cfg.catppuccin-theme.flavor}-${cfg.catppuccin-theme.accent}";
     };
   };
