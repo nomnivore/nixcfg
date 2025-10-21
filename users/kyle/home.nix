@@ -11,6 +11,7 @@ let
   # contained in modules, each containing setup related to their module
   bootstrapScript = pkgs.writeShellScriptBin "bootstrap" (builtins.readFile ../../bin/bootstrap);
   nixshellScript = pkgs.writeShellScriptBin "ns" (builtins.readFile ../../bin/ns);
+  stealScript = pkgs.writeShellScriptBin "steal" (builtins.readFile ../../bin/steal);
 in
 {
   imports = [
@@ -28,6 +29,7 @@ in
   home.packages = [
     bootstrapScript
     nixshellScript
+    stealScript
   ];
 
   programs = {

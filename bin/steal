@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [ $# -eq 0 ]; then
+  echo "Usage: $0 <file-path>"
+  exit 1
+fi
+
+# convert the symlink to a copy of the file
+cp --remove-destination "$(readlink -f $1)" $1
+# set permissions because nix store is readonly
+chmod u+w $1
