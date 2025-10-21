@@ -37,7 +37,7 @@
   "custom/launcher": {
     "format": "",
     "tooltip": false,
-    "on-click": "wofi --show drun",
+    "on-click": "rofi -terminal=foot -show drun",
   },
 
   // 2. Workspaces (Left - Hyprland)
