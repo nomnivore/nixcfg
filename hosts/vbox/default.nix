@@ -24,6 +24,7 @@
   # my options
   modules = {
     hyprland.enable = true;
+    stylix.enable = true;
 
     # use only one dm
     # regreetd.enable = true; # 'cage' has issues with vbox, probably

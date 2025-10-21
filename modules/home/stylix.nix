@@ -21,8 +21,8 @@ with lib;
           vscode.enable = false;
         };
 
-        # user fonts
-        fonts.fontconfig.enable = true;
       };
+      # user fonts
+      fonts.fontconfig.enable = true;
     };
 }

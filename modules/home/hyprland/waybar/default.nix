@@ -1,6 +1,7 @@
 { pkgs, lib, ... }:
 
 {
+  programs.wlogout.enable = true;
   programs.waybar = {
     enable = true;
     systemd.enable = true;
