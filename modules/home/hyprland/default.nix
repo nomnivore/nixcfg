@@ -34,6 +34,8 @@ with lib;
     # some default apps referenced in config
     programs.foot.enable = true;
 
+    services.mako.enable = true; # automatically styled by stylix
+
     programs.rofi = {
       enable = true;
       package = pkgs.rofi-wayland;
