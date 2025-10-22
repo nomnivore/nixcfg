@@ -10,26 +10,24 @@
 
 let
   cfg = config.modules.hyprland;
-
-  # master toggle
-  enable = osConfig.modules.hyprland.enable;
 in
 
 with lib;
 {
   options.modules.hyprland = {
+    enable = mkEnableOption "hyprland desktop environment";
 
   };
   imports =
     [ ]
     # conditional imports
-    ++ (optionals (enable) [
+    ++ (optionals cfg.enable [
       ./lookandfeel.nix
+      ./hyprpaper.nix # wallpaper
       ./bindings
       ./waybar
-      ./hyprpaper.nix # wallpaper
     ]);
-  config = mkIf osConfig.modules.hyprland.enable {
+  config = mkIf cfg.enable {
 
     # some default apps referenced in config
     programs.foot.enable = true;

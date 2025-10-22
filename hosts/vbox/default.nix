@@ -5,7 +5,12 @@
   config,
   ...
 }:
-
+let
+  # modules that are defined in both core and home, to be grouped together
+  sharedModules = {
+    hyprland.enable = true;
+  };
+in
 {
   imports = [
     # hardware config
@@ -14,19 +19,10 @@
 
     ../common.nix
   ];
-
-  home-manager.users.${username} = {
-    imports = [
-      ../../users/kyle/home.nix
-    ];
-  };
-
-  # my options
-  modules = {
+  # my system options
+  modules = sharedModules // {
+    stylix.enable = true; # TODO: move this to sharedModules without breaking the attr merge in home/stylix.nix
     limine.enable = true;
-    hyprland.enable = true;
-    stylix.enable = true;
-
     # use only one dm
     # regreetd.enable = true; # 'cage' has issues with vbox, probably
     sddm.enable = true;
@@ -37,6 +33,22 @@
     };
     pipewire.enable = true;
     networking.enable = true;
+  };
+
+  home-manager.users.${username} = {
+    imports = [
+      ../../users/kyle/home.nix
+
+      (
+        { pkgs, ... }:
+        {
+          modules = sharedModules // {
+            # my home options
+            userDirs.enable = true;
+          };
+        }
+      )
+    ];
   };
 
   # following the setup described here to create 3 partitions for UEFI
