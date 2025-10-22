@@ -65,7 +65,7 @@
   };
   environment.systemPackages = with pkgs; [
     coreutils
-    xsel
+    wl-clipboard
     virglrenderer
   ];
 
