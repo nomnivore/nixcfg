@@ -17,6 +17,17 @@
     stylix.url = "github:nix-community/stylix/release-25.05";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
 
+    # walker / elephant
+    elephant = {
+      url = "github:abenz1267/elephant";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
+    walker = {
+      url = "github:abenz1267/walker";
+      inputs.elephant.follows = "elephant";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # community packages
     nur.url = "github:nix-community/NUR";
 
@@ -129,7 +140,7 @@
         hostname = "nixos";
         username = "kyle";
         modules = [
-          stylix.nixosModules.stylix
+          stylix.nixosModules.stylix # TODO: can i remove this?
 
           nixos-wsl.nixosModules.wsl
           ./hosts/wsl.nix

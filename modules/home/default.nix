@@ -17,5 +17,6 @@
     ./stylix.nix
     ./hyprland
     ./userDirs.nix
+    ./walker.nix
   ];
 }

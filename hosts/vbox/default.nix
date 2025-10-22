@@ -45,6 +45,8 @@ in
           modules = sharedModules // {
             # my home options
             userDirs.enable = true;
+
+            walker.enable = true;
           };
         }
       )
