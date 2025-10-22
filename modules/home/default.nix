@@ -16,5 +16,6 @@
     # // off by default //
     ./stylix.nix
     ./hyprland
+    ./userDirs.nix
   ];
 }
