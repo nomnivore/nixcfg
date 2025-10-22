@@ -29,8 +29,16 @@ for arg in "$@"; do
 done
 
 # Join package names with commas for the Nix attribute set syntax
-# e.g., 'hello,git,htop'
-pkg_expr=$(IFS=, ; echo "${pkgs[*]}")
+# surrounded by curly braces if there are multiple
+# e.g., '{hello,git,htop}'
+if [ ${#pkgs[@]} -gt 1 ]; then
+  pkg_expr="{$(
+    IFS=,
+    echo "${pkgs[*]}"
+  )}"
+else
+  pkg_expr="${pkgs[*]}"
+fi
 
 # Always use the global 'nixpkgs' flake input reference.
 flake_ref="nixpkgs"
