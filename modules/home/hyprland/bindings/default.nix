@@ -1,5 +1,13 @@
-{ pkgs, ... }:
-
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.modules.hyprland;
+in
+with lib;
 {
   imports = [
     ./media.nix
@@ -7,16 +15,18 @@
     ./utilities.nix
   ];
 
-  wayland.windowManager.hyprland = {
+  config = mkIf cfg.enable {
+    wayland.windowManager.hyprland = {
 
-    settings = {
-      "$mod" = "SUPER"; # Windows key
+      settings = {
+        "$mod" = "SUPER"; # Windows key
 
-      bind = [
-        "$mod, RETURN, exec, $terminal"
-        "$mod, W, killactive,"
-        "$mod, SPACE, exec, $menu"
-      ];
+        bind = [
+          "$mod, RETURN, exec, $terminal"
+          "$mod, W, killactive,"
+          "$mod, SPACE, exec, $menu"
+        ];
+      };
     };
   };
 }

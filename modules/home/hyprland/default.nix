@@ -18,15 +18,12 @@ with lib;
     enable = mkEnableOption "hyprland desktop environment";
 
   };
-  imports =
-    [ ]
-    # conditional imports
-    ++ (optionals cfg.enable [
-      ./lookandfeel.nix
-      ./hyprpaper.nix # wallpaper
-      ./bindings
-      ./waybar
-    ]);
+  imports = [
+    ./lookandfeel.nix
+    ./hyprpaper.nix # wallpaper
+    ./bindings
+    ./waybar
+  ];
   config = mkIf cfg.enable {
 
     # some default apps referenced in config
