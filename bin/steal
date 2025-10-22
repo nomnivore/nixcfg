@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Converts a symlink of a file to a copy of that file
+# with user-write permissions.
+
 set -euo pipefail
 
 if [ $# -eq 0 ]; then
