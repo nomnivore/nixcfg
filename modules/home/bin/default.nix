@@ -1,6 +1,10 @@
 {
-  pkgs,
   lib,
+
+  # any args needed by script need to be defined here
+  # but each script will only receive what it needs via callModule
+
+  pkgs,
   ...
 }@args:
 let
@@ -13,7 +17,18 @@ let
 
   nixFilenames = builtins.attrNames nixFiles;
 
-  packages = builtins.map (file: (import ./${file}) args) nixFilenames;
+  callModule =
+    file:
+    let
+      scriptFn = import ./${file};
+
+      requiredArgs = builtins.functionArgs scriptFn;
+
+      filteredArgs = lib.attrsets.filterAttrs (name: _: lib.attrsets.hasAttr name requiredArgs) args;
+    in
+    scriptFn filteredArgs;
+
+  packages = builtins.map callModule nixFilenames;
 
 in
 {
