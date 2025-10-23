@@ -39,7 +39,7 @@ function get_user_input {
 }
 
 # --- Configuration Variables ---
-BOOT_SIZE="512MB"
+BOOT_SIZE="2GB"
 BOOT_LABEL="boot"
 ROOT_LABEL="nixos"
 SWAP_LABEL="swap"
