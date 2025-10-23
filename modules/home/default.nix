@@ -12,6 +12,8 @@
     ./sh.nix
     ./wezterm.nix
 
+    ./bin # shell scripts
+
     # /// Optional modules ///
     # // off by default //
     ./stylix.nix
