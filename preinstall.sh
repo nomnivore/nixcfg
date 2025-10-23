@@ -13,6 +13,16 @@ RESET=$'\e[0m'   # Resets text color and formatting
 
 # --- Helper Functions ---
 
+# Function to get the correct partition name suffix
+function get_partition_suffix {
+    # Check if the disk name contains 'nvme' (e.g., /dev/nvme0n1)
+    if [[ "$DISK" =~ "nvme" ]]; then
+        echo "p$1" # Use 'p' for NVMe drives: /dev/nvme0n1p1
+    else
+        echo "$1" # Standard suffix for non-NVMe (SATA/SCSI) drives: /dev/sda1
+    fi
+}
+
 # Function to safely exit on error
 function check_status {
     if [ $? -ne 0 ]; then
@@ -144,9 +154,9 @@ if [ "$BOOT_MODE" == "1" ]; then
         check_status
 
         # Set partition variables for formatting
-        BOOT_PART="${DISK}1"
-        ROOT_PART="${DISK}2"
-        SWAP_PART="${DISK}3"
+        BOOT_PART="${DISK}$(get_partition_suffix 1)"
+        ROOT_PART="${DISK}$(get_partition_suffix 2)"
+        SWAP_PART="${DISK}$(get_partition_suffix 3)"
     else
         echo "Creating root partition (no swap)..."
         
@@ -155,8 +165,8 @@ if [ "$BOOT_MODE" == "1" ]; then
         check_status
         
         # Set partition variables for formatting
-        BOOT_PART="${DISK}1"
-        ROOT_PART="${DISK}2"
+        BOOT_PART="${DISK}$(get_partition_suffix 1)"
+        ROOT_PART="${DISK}$(get_partition_suffix 2)"
         SWAP_PART=""
     fi
 
@@ -186,8 +196,8 @@ elif [ "$BOOT_MODE" == "2" ]; then
         check_status
         
         # Set partition variables for formatting
-        ROOT_PART="${DISK}1"
-        SWAP_PART="${DISK}2"
+        ROOT_PART="${DISK}$(get_partition_suffix 1)"
+        SWAP_PART="${DISK}$(get_partition_suffix 2)"
         BOOT_PART="" # Not needed for Legacy/MBR separate formatting
     else
         echo "Creating root partition (no swap)..."
@@ -197,7 +207,7 @@ elif [ "$BOOT_MODE" == "2" ]; then
         check_status
         
         # Set partition variables for formatting
-        ROOT_PART="${DISK}1"
+        ROOT_PART="${DISK}$(get_partition_suffix 1)"
         SWAP_PART=""
         BOOT_PART=""
     fi
