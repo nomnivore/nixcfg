@@ -29,8 +29,18 @@ with lib;
     # some default apps referenced in config
     programs.foot.enable = true;
 
-    services.mako.enable = true; # automatically styled by stylix
+    services.mako = {
+      enable = true;
+      settings = {
+        default-timeout = 5 * 1000;
 
+        # theme-specific settings handled by stylix
+        padding = 10;
+        border-size = 2;
+        border-radius = 4;
+        max-icon-size = 32;
+      };
+    };
     programs.rofi = {
       enable = true;
       package = pkgs.rofi-wayland;
@@ -59,6 +69,8 @@ with lib;
         # AUTOSTART
         exec-once = [
           # TODO:
+
+          # "uwsm-app -- mako"
         ];
 
         # ENVIRONMENT VARIABLES
