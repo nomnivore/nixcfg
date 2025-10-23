@@ -17,6 +17,12 @@ with lib;
   };
 
   config = mkIf cfg.enable {
+
+    # possible fix for Error 22 Display issue:
+    home.packages = [
+      pkgs.unstable.gtk4-layer-shell
+    ];
+
     programs.walker = {
       enable = true;
       runAsService = true;
