@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 setup_neovim() {
   local TARGET_DIR="$HOME/.config/nvim"
 

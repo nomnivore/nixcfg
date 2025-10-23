@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 # nix shell wrapper that uses the global 'nixpkgs' flake reference.
 #
 # Usage:

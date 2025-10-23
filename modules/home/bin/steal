@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # Converts a symlink of a file to a copy of that file
 # with user-write permissions.
 
