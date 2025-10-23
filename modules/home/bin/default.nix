@@ -5,6 +5,7 @@
   # but each script will only receive what it needs via callModule
 
   pkgs,
+  config,
   ...
 }@args:
 let
