@@ -58,7 +58,7 @@ with lib;
       settings = {
 
         # MONITORS
-        monitor = ",preferred,auto,auto";
+        monitor = ",preferred,auto,1";
 
         # MY PROGRAMS
         # TODO: manage this better

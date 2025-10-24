@@ -147,6 +147,16 @@
         ];
       };
 
+      nixosConfigurations.swift = mkNixosConfiguration {
+        # config for a virtualbox setup
+        hostname = "swift";
+        username = "kyle";
+        modules = [
+          stylix.nixosModules.stylix
+          ./hosts/swift
+        ];
+      };
+
       nixosConfigurations.vbox = mkNixosConfiguration {
         # config for a virtualbox setup
         hostname = "vbox";
