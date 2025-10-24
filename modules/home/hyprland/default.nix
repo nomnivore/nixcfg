@@ -35,7 +35,7 @@ with lib;
         default-timeout = 5 * 1000;
 
         # theme-specific settings handled by stylix
-        padding = 10;
+        padding = 15;
         border-size = 2;
         border-radius = 4;
         max-icon-size = 32;
@@ -58,7 +58,7 @@ with lib;
       settings = {
 
         # MONITORS
-        monitor = ",preferred,auto,1";
+        monitor = ",preferred,auto,1.25";
 
         # MY PROGRAMS
         # TODO: manage this better
