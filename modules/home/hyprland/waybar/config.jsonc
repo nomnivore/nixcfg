@@ -1,6 +1,7 @@
 // Waybar configuration for Hyprland, using specified modules and apps.
 // Uses 'jsonc' format to allow comments.
 {
+  "reload_on_style_change": true,
   "layer": "top",
   "position": "top",
   "mod": "dock",
