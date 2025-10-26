@@ -54,13 +54,24 @@ in
   };
 
   swapDevices = [
-    { device = "/var/lib/swapfile"; size = 8*1024;}
+    {
+      device = "/var/lib/swapfile";
+      size = 8 * 1024;
+    }
   ];
 
   environment.systemPackages = with pkgs; [
     coreutils
     wl-clipboard
   ];
+
+  services.logind.extraConfig = ''
+    HandlePowerKey=ignore
+  '';
+  boot = {
+    # use latest kernel
+    kernelPackages = pkgs.linuxPackages_latest;
+  };
 
   programs.firefox.enable = true;
 

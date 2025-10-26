@@ -37,7 +37,7 @@
   "custom/launcher": {
     "format": "",
     "tooltip": false,
-    "on-click": "rofi -terminal=foot -show drun",
+    "on-click": "nx-launcher",
   },
 
   // 2. Workspaces (Left - Hyprland)
@@ -90,7 +90,7 @@
     "tooltip": false,
     "format-bluetooth": "{icon}  {volume}%",
     "format-muted": "󰖁 Muted",
-    "on-click": "pavucontrol",
+    "on-click": "exec setsid uwsm-app -- pavucontrol", // TODO: abstract this
     "format-icons": {
       "default": "", // High volume
       "muted": "󰝟",
@@ -103,7 +103,7 @@
     "format-ethernet": "󰈁 Eth", // Ethernet icon
     "format-disconnected": "󰖪 No Network", // Disconnected icon
     "tooltip-format": "{ipaddr} | {bandwidthUpBytes} up | {bandwidthDownBytes} down",
-    // "on-click": "" // TODO: add a network manager
+    "on-click": "exec setsid uwsm-app -- foot impala", // TODO: abstract this
   },
 
   // 8. Battery (Right)
@@ -135,38 +135,3 @@
     "on-click": "wlogout",
   },
 }
-
-// {
-//   "layer": "top",
-//   "modules-left": ["hyprland/workspaces", "hyprland/submap"],
-//   "modules-center": ["hyprland/window"],
-//   "modules-right": ["tray", "cpu", "memory", "battery", "clock"],
-//
-//   "sway/window": {
-//     "max-length": 50,
-//   },
-//
-//   "battery": {
-//     "states": {
-//       "warning": 30,
-//       "critical": 15,
-//     },
-//     "format": "{capacity}% {icon}",
-//     "format-full": "{capacity}% {icon}",
-//     "format-charging": "{capacity}% 󱐋",
-//     "format-plugged": "{capacity}% 󰚥",
-//     "format-alt": "{time} {icon}",
-//     "format-icons": ["", "", "", "", ""],
-//   },
-//
-//   "clock": {
-//     "format-alt": "{:%a, %d. %b %H:%M}",
-//   },
-//
-//   "cpu": {
-//     "format": "{usage}% ",
-//   },
-//   "memory": {
-//     "format": "{}% 󱤌",
-//   },
-// }

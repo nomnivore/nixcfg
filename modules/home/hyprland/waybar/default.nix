@@ -10,7 +10,7 @@ in
 with lib;
 {
   config = mkIf cfg.enable {
-    programs.wlogout.enable = true;
+    home.packages = with pkgs; [ pavucontrol ];
     programs.waybar = {
       enable = true;
       systemd.enable = true;

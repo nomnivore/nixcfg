@@ -13,6 +13,7 @@
     # cli utils
     lsd
     bat
+    jq
 
   ];
 

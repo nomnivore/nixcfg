@@ -41,10 +41,6 @@ with lib;
         max-icon-size = 32;
       };
     };
-    programs.rofi = {
-      enable = true;
-      package = pkgs.rofi-wayland;
-    };
 
     wayland.windowManager.hyprland = {
       enable = true;
@@ -64,7 +60,7 @@ with lib;
         # TODO: manage this better
         "$terminal" = "foot";
         # "$fileManager" = "dolphin";
-        "$menu" = "rofi -terminal=$terminal -show drun";
+        "$menu" = "nx-launcher";
 
         # AUTOSTART
         exec-once = [
