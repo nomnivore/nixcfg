@@ -18,7 +18,7 @@ with lib;
       settings = {
 
         "$osdclient" =
-          "swayosd-client --monitor \"$(hyprctl monitors -j | jq -r '.[] | select(.focused == true).name')";
+          "swayosd-client --monitor \"$(hyprctl monitors -j | jq -r '.[] | select(.focused == true).name')\"";
 
         # laptop multimedia keys
         bindeld = [
