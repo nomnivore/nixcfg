@@ -21,6 +21,7 @@ with lib;
   imports = [
     ./lookandfeel.nix
     ./hyprpaper.nix # wallpaper
+    ./hyprsunset.nix # screen temperature in the evening
     ./bindings
     ./waybar
   ];
