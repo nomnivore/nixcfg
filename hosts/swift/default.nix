@@ -48,6 +48,12 @@ in
 
             walker.enable = true;
           };
+
+          # TODO: move desktop apps to a new module
+
+          home.packages = with pkgs.unstable; [
+            bitwarden-desktop
+          ];
         }
       )
     ];
