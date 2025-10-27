@@ -7,8 +7,8 @@
 
 let
   wallpaper = pkgs.fetchurl {
-    url = "https://raw.githubusercontent.com/zhichaoh/catppuccin-wallpapers/refs/heads/main/minimalistic/dark-cat-rosewater.png";
-    sha256 = "1bif87s8cxlg4k58yj5816v174vqbn4p4fqlzv2rnhj69jszpy0z";
+    url = "https://raw.githubusercontent.com/zhichaoh/catppuccin-wallpapers/refs/heads/main/landscapes/forrest.png";
+    sha256 = "sha256-jDqDj56e9KI/xgEIcESkpnpJUBo6zJiAq1AkDQwcHQM=";
   };
   cfg = config.modules.hyprland;
 in
