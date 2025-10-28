@@ -32,5 +32,18 @@ with lib;
       bitwarden-desktop
       obsidian
     ];
+
+    # web apps
+    xdg.desktopEntries = {
+      gemini = {
+        name = "Gemini";
+        exec = "nx-launch-webapp https://gemini.google.com";
+        icon = pkgs.fetchurl {
+          url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/google-gemini.png";
+          sha256 = "sha256-U16hXdmDWtsO9308rxhnmHBQMMe0QO7mySL2wMugBiM=";
+        };
+        type = "Application";
+      };
+    };
   };
 }

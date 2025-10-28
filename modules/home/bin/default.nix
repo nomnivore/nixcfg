@@ -33,5 +33,5 @@ let
 
 in
 {
-  home.packages = packages;
+  home.packages = lib.filter (p: p != null) packages;
 }
