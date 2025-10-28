@@ -16,9 +16,9 @@
 
     # /// Optional modules ///
     # // off by default //
+    ./desktop.nix
     ./stylix.nix
     ./hyprland
-    ./userDirs.nix
     ./walker.nix
   ];
 }

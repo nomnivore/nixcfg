@@ -44,16 +44,9 @@ in
         {
           modules = sharedModules // {
             # my home options
-            userDirs.enable = true;
-
+            nx.isDesktop = true;
             walker.enable = true;
           };
-
-          # TODO: move desktop apps to a new module
-
-          home.packages = with pkgs.unstable; [
-            bitwarden-desktop
-          ];
         }
       )
     ];
@@ -78,8 +71,6 @@ in
     # use latest kernel
     kernelPackages = pkgs.linuxPackages_latest;
   };
-
-  programs.firefox.enable = true;
 
   system.stateVersion = "25.05";
 }

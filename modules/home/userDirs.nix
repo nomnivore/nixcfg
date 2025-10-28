@@ -5,15 +5,11 @@
   ...
 }:
 let
-  cfg = config.modules.userDirs;
+  enabled = config.modules.nx.isDesktop;
 in
 with lib;
 {
-  options.modules.userDirs = {
-    enable = lib.mkEnableOption "user directories";
-  };
-
-  config = mkIf cfg.enable {
+  config = mkIf enabled {
     xdg.userDirs.enable = true;
     xdg.userDirs.createDirectories = true;
   };
