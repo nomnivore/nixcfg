@@ -49,6 +49,12 @@ with lib;
           "$mod, 9, workspace, 9"
           "$mod, 0, workspace, 10"
 
+          # next/prev workspace with mod+shift+hjkl
+          "$mod SHIFT, H, workspace, e-1"
+          "$mod SHIFT, J, workspace, e-1"
+          "$mod SHIFT, K, workspace, e+1"
+          "$mod SHIFT, L, workspace, e+1"
+
           # move active to a workspace with mod+shift+0-9
           "$mod SHIFT, 1, movetoworkspace, 1"
           "$mod SHIFT, 2, movetoworkspace, 2"

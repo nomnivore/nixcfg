@@ -24,7 +24,7 @@ with lib;
         bind = [
           "$mod, RETURN, exec, $terminal"
           "$mod, W, killactive,"
-          "$mod, SPACE, exec, $menu"
+          "$mod, SPACE, exec, $menu -m desktopapplications"
         ];
       };
     };
