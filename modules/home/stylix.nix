@@ -15,6 +15,7 @@ with lib;
       stylix = {
         targets = {
           waybar.addCss = false; # colors/fonts only
+          firefox.profileNames = [ "default" ];
 
           wezterm.enable = false;
           neovim.enable = false;
