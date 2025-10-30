@@ -10,7 +10,7 @@ let
 
   cmd =
     if cfg.walker.enable then
-      ''walker "$@"''
+      ''walker --width 644 --maxheight 300 --minheight 300 "$@"''
     else
       "echo 'No launchers configured, check your configuration'";
 
