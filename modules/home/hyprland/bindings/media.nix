@@ -22,6 +22,8 @@ with lib;
 
         # laptop multimedia keys
         bindeld = [
+          ",XF86PowerOff, Power Menu, exec, nx-power-menu"
+
           ",XF86AudioRaiseVolume, Volume Up, exec, $osdclient --output-volume raise"
           ",XF86AudioLowerVolume, Volume down, exec, $osdclient --output-volume lower"
           ",XF86AudioMute, Mute, exec, $osdclient --output-volume mute-toggle"

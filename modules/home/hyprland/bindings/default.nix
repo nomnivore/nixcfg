@@ -22,9 +22,10 @@ with lib;
         "$mod" = "SUPER"; # Windows key
 
         bind = [
-          "$mod, RETURN, exec, $terminal"
+          "$mod, RETURN, exec, $terminal --working-directory=\"$(nx-terminal-cwd)\""
           "$mod, W, killactive,"
           "$mod, SPACE, exec, $menu -m desktopapplications"
+          "$mod ALT, SPACE, exec, $menu"
         ];
       };
     };
