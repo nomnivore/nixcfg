@@ -19,6 +19,6 @@
     ./desktop.nix
     ./stylix.nix
     ./hyprland
-    ./walker.nix
+    ./walker
   ];
 }
