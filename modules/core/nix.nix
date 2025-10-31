@@ -23,6 +23,9 @@
       nixpkgs = {
         flake = inputs.nixpkgs;
       };
+      nixpkgs-unstable = {
+        flake = inputs.nixpkgs-unstable;
+      };
     };
 
     nixPath = [
