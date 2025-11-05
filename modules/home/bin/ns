@@ -6,26 +6,70 @@
 
 set -euo pipefail
 
-if [ $# -eq 0 ]; then
-  echo "Usage: $0 <pkg1> [pkg2 ...] [-- <command>]"
-  exit 1
-fi
+script_name=$(basename "$0")
 
-# Split args at `--`
+show_help() {
+  cat <<EOF
+nix shell wrapper that uses a global flake reference.
+
+Usage: $script_name [options] <pkg1> [pkg2 ...] [-- <command>]
+
+Description:
+  Starts an interactive shell or runs a command with specified packages
+  from a nix flake reference.
+
+Options:
+  -s, --stable    Use the 'nixpkgs' (stable) flake reference.
+                  Default is 'nixpkgs-unstable'.
+  -h, --help      Show this help message and exit.
+EOF
+}
+
+# Split args at `--`, and check for flags
 pkgs=()
 cmd=()
 found_sep=0
+flake_ref="nixpkgs-unstable"
 for arg in "$@"; do
   if [ "$arg" = "--" ]; then
     found_sep=1
     continue
   fi
+
   if [ "$found_sep" -eq 0 ]; then
-    pkgs+=("$arg")
+    case "$arg" in
+    -s | --stable)
+      flake_ref="nixpkgs"
+      continue
+      ;;
+    -h | --help)
+      show_help
+      exit 0
+      ;;
+    -*)
+      echo "Error: Unknown option '$arg'" >&2
+      echo >&2
+      show_help
+      exit 1
+      ;;
+    *)
+      pkgs+=("$arg")
+      ;;
+    esac
   else
     cmd+=("$arg")
   fi
 done
+
+if [ ${#pkgs[@]} -eq 0 ]; then
+  # If no packages are provided, but other args were, show help.
+  if [ $# -gt 0 ]; then
+    show_help
+    exit 0
+  fi
+  echo "Usage: $script_name [--stable|-s] <pkg1> [pkg2 ...] [-- <command>]"
+  exit 1
+fi
 
 # Join package names with commas for the Nix attribute set syntax
 # surrounded by curly braces if there are multiple
@@ -38,9 +82,6 @@ if [ ${#pkgs[@]} -gt 1 ]; then
 else
   pkg_expr="${pkgs[*]}"
 fi
-
-# Always use the global 'nixpkgs' flake input reference.
-flake_ref="nixpkgs"
 
 # Construct nix shell command
 # The syntax "${flake_ref}#{$pkg_expr}" injects the packages using the
