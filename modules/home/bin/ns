@@ -62,10 +62,13 @@ for arg in "$@"; do
 done
 
 if [ ${#pkgs[@]} -eq 0 ]; then
-  # If no packages are provided, but other args were, show help.
   if [ $# -gt 0 ]; then
     show_help
     exit 0
+  fi
+  # check if the system has "nx-search-pkgs" script
+  if [ -x "$(command -v nx-search-pkgs)" ]; then
+    exec nx-search-pkgs
   fi
   echo "Usage: $script_name [--stable|-s] <pkg1> [pkg2 ...] [-- <command>]"
   exit 1
