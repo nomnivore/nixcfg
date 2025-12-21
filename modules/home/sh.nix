@@ -48,6 +48,7 @@
     oh-my-posh = {
       enable = true;
       package = pkgs.unstable.oh-my-posh;
+      enableZshIntegration = true;
       # useTheme = "pure";
       settings = builtins.fromTOML (builtins.readFile ./zsh/omp-pure.toml);
     };
