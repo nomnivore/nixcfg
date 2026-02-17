@@ -51,7 +51,7 @@
       git_protocol = "https";
     };
     extensions = with pkgs.unstable; [
-      gh-copilot # Copilot AI in the command line
+      github-copilot-cli # Copilot AI in the command line
       gh-s # GitHub Search
       gh-poi # Delete merged local branches
     ];
