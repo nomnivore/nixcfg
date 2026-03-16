@@ -23,6 +23,10 @@ in
     n = "nvim";
   };
 
+  home.packages = with pkgs; [
+    icu # unicode/globalization, needed for some lsps
+  ];
+
   # fetch my configuration
   # allowing it to update itself (lazy.nvim)
   # and also allow easy local edits
