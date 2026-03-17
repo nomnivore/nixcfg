@@ -24,6 +24,7 @@
       ripgrep
       fd
 
+      claude-code
       gemini-cli
       # charm stuff
       gum
