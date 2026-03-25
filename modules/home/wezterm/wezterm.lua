@@ -255,6 +255,7 @@ config.keys = {
 
 	{ key = "UpArrow", mods = "SHIFT", action = act.ScrollToPrompt(-1) },
 	{ key = "DownArrow", mods = "SHIFT", action = act.ScrollToPrompt(1) },
+	{ key = "Enter", mods = "SHIFT", action = act.SendString("\x1b[13;2u") },
 
 	-- tab bindings
 	{ key = "n", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
