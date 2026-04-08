@@ -104,10 +104,32 @@ child:selected .item-box * {
   font-style: italic;
 }
 
-.keybind-hints {
+.keybinds {
   background: @background;
-  padding: 10px;
+  padding: 2px 10px;
   margin-top: 10px;
+  border-top: 1px solid alpha(@border, 0.25);
+}
+
+.keybind {
+  margin-right: 4px;
+}
+
+.keybind-button {
+  all: unset;
+}
+
+.keybind-bind {
+  border: 1px solid alpha(@border, 0.5);
+  padding: 2px 7px;
+  border-radius: 3px;
+  background: alpha(@border, 0.1);
+  font-size: 13px;
+}
+
+.keybind-label {
+  font-size: 11px;
+  color: alpha(@text, 0.55);
 }
 
 .preview {
