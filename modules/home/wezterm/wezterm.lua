@@ -440,15 +440,42 @@ for i = 1, 9 do
 	})
 end
 
+local function format_binding(mods, key, desc, table_name)
+	mods = mods or ""
+	mods = string.gsub(mods, "LEADER", "LDR")
+	mods = string.gsub(mods, "|", " + ")
+	local segments = {
+		-- add mods as italics
+		{ Attribute = { Italic = true } },
+		{ Text = string.format("%-15s", string.upper(mods or "")) },
+		"ResetAttributes",
+		{ Attribute = { Intensity = "Bold" } },
+		{ Text = string.format("%-10s", string.upper(key)) },
+		"ResetAttributes",
+		{ Foreground = { AnsiColor = "Silver" } },
+		{ Text = string.format(" %s", desc) },
+		"ResetAttributes",
+	}
+
+	if table_name ~= nil then
+		table.insert(segments, { Foreground = { AnsiColor = "Teal" } })
+		table.insert(segments, { Text = " [ " .. table_name .. " ]" })
+	end
+
+	table.insert(segments, "ResetAttributes")
+
+	return wezterm.format(segments)
+end
+
 local function keybind_info_choices(keys, key_tables)
 	local choices = {}
 
 	-- normal bindings
 	for _, binding in ipairs(keys) do
 		if binding.desc then
-			local mods = binding.mods and (binding.mods .. " + ") or ""
 			table.insert(choices, {
-				label = string.format("%-20s %s", mods .. string.upper(binding.key), binding.desc),
+				-- label = string.format("%-20s %s", mods .. string.upper(binding.key), binding.desc),
+				label = format_binding(binding.mods, binding.key, binding.desc, nil),
 			})
 		end
 	end
@@ -461,15 +488,20 @@ local function keybind_info_choices(keys, key_tables)
 			-- section header
 			for _, binding in ipairs(bindings) do
 				if binding.desc then
-					local mods = bindings.mods and (binding.mods .. " + ") or ""
 					table.insert(choices, {
-						label = string.format("  %-18s %s", mods .. string.upper(binding.key), binding.desc),
+						-- label = string.format("  %-18s %s", mods .. string.upper(binding.key), binding.desc),
+						label = format_binding(binding.mods, binding.key, binding.desc, table_name),
 					})
 					count = count + 1
 				end
 			end
 			if count > 0 then
-				table.insert(choices, #choices - count + 1, { label = "[[ " .. table_name .. " ]]" })
+				table.insert(choices, #choices - count + 1, {
+					label = wezterm.format({
+						{ Foreground = { AnsiColor = "Teal" } },
+						{ Text = "-- " .. table_name .. " --" },
+					}),
+				})
 			end
 		end
 	end
