@@ -4,6 +4,10 @@ local config = wezterm.config_builder()
 local launch_menu = {}
 local is_windows = wezterm.target_triple == "x86_64-pc-windows-msvc"
 
+-- quick config edits/options
+local use_bg_image = false
+local bg_transparency = true
+
 -- appearance / theme
 config.color_scheme = "Catppuccin Mocha"
 local scheme = wezterm.color.get_builtin_schemes()["Catppuccin Mocha"]
@@ -15,10 +19,13 @@ config.background = {
 		source = { Color = scheme.background },
 		width = "100%",
 		height = "100%",
-		opacity = 0.95,
+		opacity = bg_transparency and 0.95 or 1,
 	},
-	-- image layer
-	{
+}
+
+if use_bg_image then
+	table.insert(config.background, {
+
 		source = { File = wezterm.config_dir .. "/background.png" },
 		vertical_align = "Bottom",
 		horizontal_align = "Right",
@@ -28,8 +35,8 @@ config.background = {
 			brightness = 0.1,
 		},
 		opacity = 0.5,
-	},
-}
+	})
+end
 
 -- config.font = wezterm.font("Hack Nerd Font")
 config.font = wezterm.font("Monaspace Neon")
@@ -199,8 +206,6 @@ wezterm.on("update-status", function(window, pane)
 		wezterm.log_info(cmd)
 	end
 
-	window:toast_notification("status", "updated!", nil, 4000)
-
 	window:set_right_status(wezterm.format({
 		{ Text = wezterm.nerdfonts.oct_table .. "  " .. stat },
 		{ Text = " | " },
@@ -246,23 +251,23 @@ end)
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 2000 }
 config.keys = {
 	-- send C-a when pressing C-a twice
-	{ key = "a", mods = "LEADER|CTRL", action = act.SendKey({ key = "a", mods = "CTRL" }) },
+	{ key = "a", mods = "LEADER|CTRL", action = act.SendKey({ key = "a", mods = "CTRL" }), desc = "Send Ctrl+A" },
 
-	{ key = "c", mods = "LEADER", action = act.ActivateCopyMode },
-	{ key = "l", mods = "LEADER", action = act.ActivateLastTab },
-	{ key = "l", mods = "LEADER|SHIFT", action = act.ShowLauncher },
-	{ key = "p", mods = "LEADER", action = act.ActivateCommandPalette },
+	{ key = "c", mods = "LEADER", action = act.ActivateCopyMode, desc = "Activate Copy Mode" },
+	{ key = "l", mods = "LEADER", action = act.ActivateLastTab, desc = "Go to Last tab" },
+	{ key = "l", mods = "LEADER|SHIFT", action = act.ShowLauncher, desc = "Show Launcher" },
+	{ key = "p", mods = "LEADER", action = act.ActivateCommandPalette, desc = "Activate Command Palette" },
 
-	{ key = "UpArrow", mods = "SHIFT", action = act.ScrollToPrompt(-1) },
-	{ key = "DownArrow", mods = "SHIFT", action = act.ScrollToPrompt(1) },
+	{ key = "UpArrow", mods = "SHIFT", action = act.ScrollToPrompt(-1), desc = "Scroll Up" },
+	{ key = "DownArrow", mods = "SHIFT", action = act.ScrollToPrompt(1), desc = "Scroll Down" },
 	{ key = "Enter", mods = "SHIFT", action = act.SendString("\x1b[13;2u") },
 
 	-- tab bindings
-	{ key = "n", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
-	{ key = "[", mods = "LEADER", action = act.ActivateTabRelative(-1) },
-	{ key = "]", mods = "LEADER", action = act.ActivateTabRelative(1) },
-	{ key = "t", mods = "LEADER|SHIFT", action = act.ShowTabNavigator },
-	{ key = "&", mods = "LEADER|SHIFT", action = act.CloseCurrentTab({ confirm = true }) },
+	{ key = "n", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain"), desc = "New Tab" },
+	{ key = "[", mods = "LEADER", action = act.ActivateTabRelative(-1), desc = "Previous Tab" },
+	{ key = "]", mods = "LEADER", action = act.ActivateTabRelative(1), desc = "Next Tab" },
+	{ key = "t", mods = "LEADER|SHIFT", action = act.ShowTabNavigator, desc = "Show Tab Navigator" },
+	{ key = "&", mods = "LEADER|SHIFT", action = act.CloseCurrentTab({ confirm = true }), desc = "Close Tab" },
 
 	-- move to new tab
 	{
@@ -272,18 +277,29 @@ config.keys = {
 			local tab, window = pane:move_to_new_tab()
 			pane:activate()
 		end),
+		desc = "Move Pane to New Tab",
 	},
 
 	-- === pane bindings ===
 	-- navigation
-	{ key = "h", mods = "CTRL|SHIFT", action = act.ActivatePaneDirection("Left") },
-	{ key = "j", mods = "CTRL|SHIFT", action = act.ActivatePaneDirection("Down") },
-	{ key = "k", mods = "CTRL|SHIFT", action = act.ActivatePaneDirection("Up") },
-	{ key = "l", mods = "CTRL|SHIFT", action = act.ActivatePaneDirection("Right") },
-	{ key = "s", mods = "LEADER", action = act.PaneSelect },
+	{ key = "h", mods = "CTRL|SHIFT", action = act.ActivatePaneDirection("Left"), desc = "Focus Left" },
+	{ key = "j", mods = "CTRL|SHIFT", action = act.ActivatePaneDirection("Down"), desc = "Focus Down" },
+	{ key = "k", mods = "CTRL|SHIFT", action = act.ActivatePaneDirection("Up"), desc = "Focus Up" },
+	{ key = "l", mods = "CTRL|SHIFT", action = act.ActivatePaneDirection("Right"), desc = "Focus Right" },
+	{ key = "s", mods = "LEADER", action = act.PaneSelect, desc = "Select Pane" },
 	-- splits
-	{ key = "%", mods = "LEADER|SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-	{ key = '"', mods = "LEADER|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	{
+		key = "%",
+		mods = "LEADER|SHIFT",
+		action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+		desc = "Split Pane Horizontally",
+	},
+	{
+		key = '"',
+		mods = "LEADER|SHIFT",
+		action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
+		desc = "Split Pane Vertically",
+	},
 	-- show a small terminal at the bottom
 	{
 		key = "t",
@@ -295,12 +311,18 @@ config.keys = {
 			},
 			size = { Percent = 20 },
 		}),
+		desc = "Show Small Terminal",
 	},
 	-- zoom
-	{ key = "z", mods = "LEADER", action = act.TogglePaneZoomState },
+	{ key = "z", mods = "LEADER", action = act.TogglePaneZoomState, desc = "Toggle Pane Zoom" },
 
 	-- key tables
-	{ key = "r", mods = "LEADER", action = act.ActivateKeyTable({ name = "manage_panes", one_shot = false }) },
+	{
+		key = "r",
+		mods = "LEADER",
+		action = act.ActivateKeyTable({ name = "manage_panes", one_shot = false }),
+		desc = "Manage Panes Mode",
+	},
 }
 
 config.key_tables = {
@@ -308,16 +330,16 @@ config.key_tables = {
 	manage_panes = {
 		-- resize by 1
 		{ key = "LeftArrow", action = act.AdjustPaneSize({ "Left", 1 }) },
-		{ key = "h", action = act.AdjustPaneSize({ "Left", 1 }) },
+		{ key = "h", action = act.AdjustPaneSize({ "Left", 1 }), desc = "Resize Left" },
 
 		{ key = "RightArrow", action = act.AdjustPaneSize({ "Right", 1 }) },
-		{ key = "l", action = act.AdjustPaneSize({ "Right", 1 }) },
+		{ key = "l", action = act.AdjustPaneSize({ "Right", 1 }), desc = "Resize Right" },
 
 		{ key = "UpArrow", action = act.AdjustPaneSize({ "Up", 1 }) },
-		{ key = "k", action = act.AdjustPaneSize({ "Up", 1 }) },
+		{ key = "k", action = act.AdjustPaneSize({ "Up", 1 }), desc = "Resize Up" },
 
 		{ key = "DownArrow", action = act.AdjustPaneSize({ "Down", 1 }) },
-		{ key = "j", action = act.AdjustPaneSize({ "Down", 1 }) },
+		{ key = "j", action = act.AdjustPaneSize({ "Down", 1 }), desc = "Resize Down" },
 
 		-- resize by 5
 		{ key = "LeftArrow", mods = "SHIFT", action = act.AdjustPaneSize({ "Left", 5 }) },
@@ -333,26 +355,51 @@ config.key_tables = {
 		{ key = "j", mods = "SHIFT", action = act.AdjustPaneSize({ "Down", 5 }) },
 
 		-- rotate panes
-		{ key = "r", action = act.RotatePanes("Clockwise") },
+		{ key = "r", action = act.RotatePanes("Clockwise"), desc = "Rotate Panes" },
 		{ key = "r", mods = "SHIFT", action = act.RotatePanes("CounterClockwise") },
 
 		-- switch panes by direction
 		{ key = "LeftArrow", mods = "CTRL", action = act.ActivatePaneDirection("Left") },
-		{ key = "h", mods = "CTRL", action = act.ActivatePaneDirection("Left") },
+		{ key = "h", mods = "CTRL", action = act.ActivatePaneDirection("Left"), desc = "Focus Left" },
 		{ key = "RightArrow", mods = "CTRL", action = act.ActivatePaneDirection("Right") },
-		{ key = "l", mods = "CTRL", action = act.ActivatePaneDirection("Right") },
+		{ key = "l", mods = "CTRL", action = act.ActivatePaneDirection("Right"), desc = "Focus Right" },
 		{ key = "UpArrow", mods = "CTRL", action = act.ActivatePaneDirection("Up") },
-		{ key = "k", mods = "CTRL", action = act.ActivatePaneDirection("Up") },
+		{ key = "k", mods = "CTRL", action = act.ActivatePaneDirection("Up"), desc = "Focus Up" },
 		{ key = "DownArrow", mods = "CTRL", action = act.ActivatePaneDirection("Down") },
-		{ key = "j", mods = "CTRL", action = act.ActivatePaneDirection("Down") },
+		{ key = "j", mods = "CTRL", action = act.ActivatePaneDirection("Down"), desc = "Focus Down" },
 
 		-- create / destroy panes
-		{ key = "%", mods = "SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-		{ key = "|", mods = "SHIFT", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-		{ key = '"', mods = "SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-		{ key = "_", mods = "SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-		{ key = "x", action = act.CloseCurrentPane({ confirm = true }) },
-		{ key = "x", mods = "SHIFT", action = act.CloseCurrentPane({ confirm = false }) },
+		{
+			key = "%",
+			mods = "SHIFT",
+			action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+			desc = "Split Horizontally",
+		},
+		{
+			key = "|",
+			mods = "SHIFT",
+			action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+			desc = "Split Horizontally",
+		},
+		{
+			key = '"',
+			mods = "SHIFT",
+			action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
+			desc = "Split Vertically",
+		},
+		{
+			key = "_",
+			mods = "SHIFT",
+			action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
+			desc = "Split Vertically",
+		},
+		{ key = "x", action = act.CloseCurrentPane({ confirm = true }), desc = "Close Pane" },
+		{
+			key = "x",
+			mods = "SHIFT",
+			action = act.CloseCurrentPane({ confirm = false }),
+			desc = "Close Pane (No Confirm)",
+		},
 
 		-- Cancel the mode by pressing escape, enter, or space
 		{ key = "Escape", action = "PopKeyTable" },
@@ -377,18 +424,69 @@ end
 
 config.key_tables.copy_mode = copy_mode_kt
 
+-- TODO: reduce this to 1 entry in keybind reference
 for i = 1, 9 do
 	table.insert(config.keys, {
 		key = tostring(i),
 		mods = "LEADER",
 		action = act.ActivateTab(i - 1),
+		-- desc = "Go to Tab " .. i,
 	})
 	table.insert(config.keys, {
 		key = tostring(i),
 		mods = "LEADER|CTRL",
 		action = act.ActivatePaneByIndex(i - 1),
+		-- desc = "Go to Pane " .. i,
 	})
 end
+
+local function keybind_info_choices(keys, key_tables)
+	local choices = {}
+
+	-- normal bindings
+	for _, binding in ipairs(keys) do
+		if binding.desc then
+			local mods = binding.mods and (binding.mods .. " + ") or ""
+			table.insert(choices, {
+				label = string.format("%-20s %s", mods .. string.upper(binding.key), binding.desc),
+			})
+		end
+	end
+
+	-- key table bindings
+	if key_tables then
+		for table_name, bindings in pairs(key_tables) do
+			-- count # of bindings with descriptions
+			local count = 0
+			-- section header
+			for _, binding in ipairs(bindings) do
+				if binding.desc then
+					local mods = bindings.mods and (binding.mods .. " + ") or ""
+					table.insert(choices, {
+						label = string.format("  %-18s %s", mods .. string.upper(binding.key), binding.desc),
+					})
+					count = count + 1
+				end
+			end
+			if count > 0 then
+				table.insert(choices, #choices - count + 1, { label = "[[ " .. table_name .. " ]]" })
+			end
+		end
+	end
+
+	return choices
+end
+
+table.insert(config.keys, {
+	key = "?",
+	mods = "LEADER|SHIFT",
+	action = act.InputSelector({
+		title = "Keybind Reference",
+		fuzzy = true,
+		choices = keybind_info_choices(config.keys, config.key_tables),
+		action = wezterm.action_callback(function() end),
+	}),
+})
 
 config.launch_menu = launch_menu
 return config
