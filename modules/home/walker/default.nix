@@ -28,10 +28,12 @@ with lib;
       enable = true;
       runAsService = true;
 
-      config = {
-        theme = "omarchy";
-      }
-      // builtins.fromTOML (builtins.readFile ./config.toml);
+      config = mkMerge [
+        (builtins.fromTOML (builtins.readFile ./config.toml))
+        {
+          theme = "omarchy";
+        }
+      ];
 
       themes = {
         "omarchy" = {
