@@ -17,7 +17,7 @@ if enabled then
       Shutdown"
 
     #TODO: add a lock service
-    LOCK_CMD="hyprctl dispatch exit"
+    LOCK_CMD="hyprlock"
     LOGOUT_CMD="hyprctl dispatch exit"
     SLEEP_CMD="systemctl suspend"
     REBOOT_CMD="systemctl reboot"
