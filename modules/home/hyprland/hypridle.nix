@@ -15,6 +15,10 @@ with lib;
       brightnessctl # only used here right now, if used elsewhere extract to its own module
     ];
 
+    wayland.windowManager.hyprland = {
+      settings.exec-once = [ "uwsm app -- hypridle" ];
+    };
+
     services.hypridle = {
       enable = true;
 
