@@ -37,13 +37,6 @@ with lib;
             on-resume = "brightnessctl -r";
           }
 
-          # keyboard backlight timeout
-          {
-            timeout = 150; # 2.5m
-            on-timeout = "brightnessctl -sd rgb:kbg_backlight set 0";
-            on-resume = "brightnessctl -rd rgb:kbd_backlight";
-          }
-
           # session timeout
           {
             timeout = 300; # 5m
