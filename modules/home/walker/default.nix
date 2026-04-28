@@ -24,6 +24,16 @@ with lib;
       pkgs.unstable.gtk4-layer-shell
     ];
 
+    # icons depend on gtk iconTheme
+    # if more depend on this, it should become its own module
+    gtk = {
+      enable = true;
+      iconTheme = {
+        package = pkgs.papirus-icon-theme;
+        name = "Papirus-Dark";
+      };
+    };
+
     programs.walker = {
       enable = true;
       runAsService = true;
