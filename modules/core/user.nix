@@ -6,6 +6,8 @@
     extraGroups = [
       "wheel"
       "docker"
+
+      "video"
     ];
 
     # FIXME: add password

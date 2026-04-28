@@ -23,6 +23,7 @@ with lib;
     ./hyprpaper.nix # wallpaper
     ./hyprsunset.nix # screen temperature in the evening
     ./hyprlock.nix
+    ./hypridle.nix
     ./bindings
     ./waybar
   ];
