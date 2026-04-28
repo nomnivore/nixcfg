@@ -17,9 +17,7 @@ with lib;
     };
   };
 
-  config = mkIf (cfg.enable) {
-    stylix.enable = true;
-    stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+  config = mkIf cfg.enable {
 
     fonts.fontDir.enable = true;
     fonts.fontconfig.enable = true;
@@ -27,21 +25,25 @@ with lib;
       nerd-fonts.monaspace
       monaspace # fallback?
     ];
+    stylix = {
+      enable = true;
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
-    stylix.fonts = {
-      # serif = {};
-      # sansSerif = {};
-      monospace = {
-        package = pkgs.nerd-fonts.monaspace;
-        name = "MonaspiceNe Nerd Font";
+      fonts = {
+        # serif = {};
+        # sansSerif = {};
+        monospace = {
+          package = pkgs.nerd-fonts.monaspace;
+          name = "MonaspiceNe Nerd Font";
+        };
+        # emoji = {};
       };
-      # emoji = {};
-    };
 
-    stylix.cursor = {
-      package = pkgs.catppuccin-cursors.mochaDark;
-      name = "catppuccin-mocha-dark-cursors"; # /result/share/icons/???
-      size = 24;
+      cursor = {
+        package = pkgs.catppuccin-cursors.mochaDark;
+        name = "catppuccin-mocha-dark-cursors"; # /result/share/icons/???
+        size = 24;
+      };
     };
   };
 }
