@@ -11,7 +11,7 @@
 #waybar .modules-right > widget > * {
   padding: 0 10px;
   margin: 0;
-  border-radius: 8px; /* Slightly smaller rounded corners for modules */
+  /* border-radius: 8px;  Slightly smaller rounded corners for modules */
   background-color: @base01; /* Alternate background for modules */
 }
 
@@ -19,12 +19,11 @@
 #waybar #custom-launcher {
   background-color: @base01;
   color: @base0D;
-  padding: 0 12px;
-  margin-left: 10px;
+  padding: 0px;
+  min-width: 36px;
   font-size: 16px;
   font-weight: bold;
 }
-
 
 #waybar #custom-launcher:hover {
   color: @base0E;
@@ -109,7 +108,6 @@
   color: @base08;
   padding: 0;
   min-width: 36px;
-  margin-right: 10px;
   font-size: 16px;
 }
 
