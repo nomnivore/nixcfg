@@ -37,6 +37,16 @@ with lib;
           "$mod, down, movefocus, d"
           "$mod, J, movefocus, d"
 
+          # resize with mod+alt+ arrows/hjkl
+          "$mod ALT, left, resizeactive, -20 0"
+          "$mod ALT, H, resizeactive, -20 0"
+          "$mod ALT, right, resizeactive, 20 0"
+          "$mod ALT, L, resizeactive, 20 0"
+          "$mod ALT, up, resizeactive, 0 -20"
+          "$mod ALT, K, resizeactive, 0 -20"
+          "$mod ALT, down, resizeactive, 0 20"
+          "$mod ALT, J, resizeactive, 0 20"
+
           # change workspace with mod+0-9
           "$mod, 1, workspace, 1"
           "$mod, 2, workspace, 2"
