@@ -2,7 +2,7 @@
 #waybar {
   background-color: @base00; /* Default background */
   color: @base05; /* Default text */
-  border-radius: 10px; /* Rounded corners for the bar itself */
+  /* border-radius: 10px;  Rounded corners for the bar itself */
   min-height: 0;
 }
 
@@ -16,19 +16,18 @@
 }
 
 /* 1. App Launcher Button (custom/launcher) */
-#custom-launcher {
-  /* Dark text color widget: Item off background color (@base0D) */
-  background-color: @base0D;
-  /* Dark text color widget: Default text color (@base00) */
-  color: @base00;
-  padding: 0 14px;
+#waybar #custom-launcher {
+  background-color: @base01;
+  color: @base0D;
+  padding: 0 12px;
   margin-left: 10px;
   font-size: 16px;
   font-weight: bold;
 }
 
-#custom-launcher:hover {
-  background-color: @base0E; /* Item on background color */
+
+#waybar #custom-launcher:hover {
+  color: @base0E;
 }
 
 /* 2. Workspaces */
@@ -86,35 +85,34 @@
 /* 5. Battery Status */
 #battery {
   background-color: @base01;
-  color: @base0B; /* Use Green for good battery */
+  color: @base0B;
 }
 
-#battery.charging {
+#waybar #battery.charging {
   background-color: @base01;
-  color: @base0E; /* Item on background color (Purple) for charging */
+  color: @base0E;
 }
 
-#battery.warning {
-  background-color: @base0A; /* Warning color */
-  color: @base00; /* Dark text for readability */
+#waybar #battery.warning {
+  background-color: @base01;
+  color: @base0A;
 }
 
-#battery.critical {
-  background-color: @base09; /* Urgent color */
-  color: @base00; /* Dark text for readability */
+#waybar #battery.critical {
+  background-color: @base01;
+  color: @base08;
 }
 
 /* 6. Power/Logout Button (custom/power) */
-#custom-power {
-  /* Dark text color widget: Error background color (@base08) */
-  background-color: @base08;
-  /* Dark text color widget: Default text color (@base00) */
-  color: @base00;
-  padding: 0 14px;
+#waybar #custom-power {
+  background-color: @base01;
+  color: @base08;
+  padding: 0;
+  min-width: 36px;
   margin-right: 10px;
   font-size: 16px;
 }
 
-#custom-power:hover {
-  background-color: @base09; /* Urgent on hover */
+#waybar #custom-power:hover {
+  color: @base09;
 }
