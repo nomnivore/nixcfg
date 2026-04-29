@@ -55,6 +55,16 @@ with lib;
         };
         type = "Application";
       };
+
+      claude = {
+        name = "Claude";
+        exec = "nx-launch-webapp https://claude.ai";
+        icon = pkgs.fetchurl {
+          url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/claude-ai.png";
+          sha256 = "sha256-76HQVfcmqUniwXKBC/E5DiaIdUMR0K3oVWA26HwSdfA=";
+        };
+        type = "Application";
+      };
     };
   };
 }
