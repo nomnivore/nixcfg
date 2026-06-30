@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# clean-runner-caches.sh — clear npx / pnpm dlx / bunx temp + runner caches
+set -u
+shopt -s nullglob   # unmatched globs expand to nothing instead of a literal path
+
+echo "Clearing npx cache..."
+rm -rf "${HOME}/.npm/_npx"
+
+echo "Clearing pnpm dlx cache..."
+rm -rf "${HOME}/.cache/pnpm/dlx"
+# pnpm follows XDG_CACHE_HOME when set; clear that location too if it differs.
+[ -n "${XDG_CACHE_HOME:-}" ] && rm -rf "${XDG_CACHE_HOME}/pnpm/dlx"
+# pnpm v11+ installs dlx packages into the global virtual store, so the dir above
+# no longer holds the package content. Prune unreferenced packages from the store.
+# Safe: only removes packages not referenced by any project; no-op on a clean store.
+command -v pnpm >/dev/null 2>&1 && pnpm store prune 2>/dev/null
+
+echo "Clearing bunx temp extractions..."
+clean_bun_tmp() {
+  local me root seen=""
+  me="$(id -u)"
+  # A custom TMPDIR (nix-shell / nix develop, sandboxes, etc.) can land in any of these.
+  for root in /tmp /var/tmp "${TMPDIR:-}" "${XDG_RUNTIME_DIR:-}"; do
+    [ -n "$root" ] && [ -d "$root" ] || continue
+    case " $seen " in *" $root "*) continue ;; esac   # dedupe (TMPDIR often == /tmp)
+    seen="$seen $root"
+    # -user "$me"        : never touch another user's temp dirs
+    # -maxdepth 1 -type d: only top-level dirs, don't descend into package trees
+    # drop the -o -name 'bun-*' clause if you only want bunx (not `bun repl`, etc.)
+    find "$root" -maxdepth 1 -type d \( -name 'bunx-*' -o -name 'bun-*' \) \
+         -user "$me" -exec rm -rf {} + 2>/dev/null
+  done
+}
+clean_bun_tmp
+
+echo "Clearing bun install cache..."
+command -v bun >/dev/null 2>&1 && bun pm cache rm 2>/dev/null
+
+echo "Done."
