@@ -10,6 +10,7 @@
 
       xdg-utils
       gcc # c compiler
+      gnumake
       pyenv
     ]
     # Unstable packages
