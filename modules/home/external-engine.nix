@@ -2,12 +2,12 @@
   config,
   pkgs,
   lib,
-  flakePath,
+  vars,
   ...
 }:
 
 let
-  externalDir = "${flakePath}/external";
+  externalDir = "${vars.flakePath}/external";
   cfg = config.modules.extRepos;
 
   generateLinks =
