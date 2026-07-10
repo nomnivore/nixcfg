@@ -31,6 +31,6 @@ update_rust() {
   fi
 }
 
-setup_neovim
+# setup_neovim
 update_neovim
 update_rust

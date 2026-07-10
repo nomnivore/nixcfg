@@ -9,6 +9,8 @@
     ./git.nix
     ./neovim.nix
     ./packages.nix
+    ./external-engine.nix
+    ./agents.nix
     ./sh.nix
     ./wezterm.nix
 

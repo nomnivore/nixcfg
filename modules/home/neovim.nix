@@ -26,6 +26,13 @@ in
   # fetch my configuration
   # allowing it to update itself (lazy.nvim)
   # and also allow easy local edits
+  #
+  modules.extRepos.nvim = {
+    repo = "nomnivore/nvim";
+    links = {
+      ".config/nvim" = ".";
+    };
+  };
 
   # home.activation.setup-neovim =
   #   with pkgs;
