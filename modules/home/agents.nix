@@ -11,7 +11,7 @@
     links = {
       ".claude/CLAUDE.md" = "CLAUDE.md";
       ".claude/skills" = "skills";
-      ".claude/subagents" = "subagents";
+      ".claude/agents" = "agents";
     };
   };
 }

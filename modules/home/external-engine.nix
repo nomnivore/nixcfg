@@ -7,7 +7,7 @@
 }:
 
 let
-  externalDir = "${vars.flakePath}/external";
+  externalDir = "${config.home.homeDirectory}/${vars.flakePath}/external";
   cfg = config.modules.extRepos;
 
   generateLinks =
