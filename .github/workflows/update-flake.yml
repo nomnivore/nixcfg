@@ -33,8 +33,10 @@ jobs:
       # introduced by the bump (a renamed or removed option, a dropped
       # attribute, a type error) but NOT build/compile failures. Takes seconds.
       # If a config needs impure evaluation, add --impure.
+      # This breaks if any configs are not x86_64.
       - name: Check the flake evaluates
-        run: nix flake check --no-build
+        timeout-minutes: 5
+        run: nix flake check
 
       - name: Push to main
         run: git push origin HEAD:main
