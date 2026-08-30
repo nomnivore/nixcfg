@@ -5,41 +5,36 @@ on:
     - cron: "0 0 * * 0" # Runs at midnight (00:00) on Sundays
   workflow_dispatch: # Allows manual triggering of the workflow
 
+permissions:
+  contents: write # Lets the built-in GITHUB_TOKEN push to main
+
 jobs:
   update-flake:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
         with:
           ref: main # Adjust if your default branch has a different name
 
       - name: Set up Nix
-        uses: cachix/install-nix-action@v21
+        uses: cachix/install-nix-action@v31
 
-      - name: Update Nix flake
-        run: |
-          nix flake update --commit-lock-file
+      - name: Update flake.lock
+        run: nix flake update --commit-lock-file
         env:
           GIT_AUTHOR_NAME: "GitHub Actions"
           GIT_AUTHOR_EMAIL: "actions@github.com"
           GIT_COMMITTER_NAME: "GitHub Actions"
           GIT_COMMITTER_EMAIL: "actions@github.com"
 
-      - name: Push changes
-        run: |
-          git push origin HEAD:refs/heads/update-flake
-        env:
-          GIT_AUTHOR_NAME: "GitHub Actions"
-          GIT_AUTHOR_EMAIL: "actions@github.com"
-          GIT_COMMITTER_NAME: "GitHub Actions"
-          GIT_COMMITTER_EMAIL: "actions@github.com"
+      # Light sanity check: evaluate the whole flake -- every host, both
+      # architectures -- without building anything. Catches evaluation errors
+      # introduced by the bump (a renamed or removed option, a dropped
+      # attribute, a type error) but NOT build/compile failures. Takes seconds.
+      # If a config needs impure evaluation, add --impure.
+      - name: Check the flake evaluates
+        run: nix flake check --no-build
 
-      - name: Create a Pull Request
-        uses: peter-evans/create-pull-request@v4
-        with:
-          title: "Update flake.lock"
-          body: "Automated update of flake.lock file by GitHub Actions"
-          base: main # Adjust if your default branch has a different name
-          branch: update-flake
+      - name: Push to main
+        run: git push origin HEAD:main
