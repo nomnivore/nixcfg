@@ -10,17 +10,21 @@ let
   neovim-pkg = neovim-nightly-overlay.packages.${pkgs.system}.default;
 in
 {
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    package = neovim-pkg;
+  # not using the home-manager `programs.neovim` module: it insists on
+  # managing ~/.config/nvim/init.lua itself, which collides with the
+  # out-of-store symlink below (my nvim config is a separate git repo)
+  home.packages = [ neovim-pkg ];
 
-    vimAlias = true;
-    vimdiffAlias = true;
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
   };
 
   home.shellAliases = {
     n = "nvim";
+    vim = "nvim";
+    vi = "nvim";
+    vimdiff = "nvim -d";
   };
 
   # fetch my configuration

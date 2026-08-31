@@ -64,9 +64,7 @@ in
     wl-clipboard
   ];
 
-  services.logind.extraConfig = ''
-    HandlePowerKey=ignore
-  '';
+  services.logind.settings.Login.HandlePowerKey = "ignore";
   boot = {
     # use latest kernel
     kernelPackages = pkgs.linuxPackages_latest;

@@ -17,6 +17,10 @@ with lib;
   };
 
   config = mkIf cfg.enable {
+    # stylix ships its own limine target that sets the same options with
+    # its own color mapping; disable it since we style limine manually below
+    stylix.targets.limine.enable = false;
+
     boot.loader.limine = {
       enable = true;
       efiSupport = true;
