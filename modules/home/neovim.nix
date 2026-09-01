@@ -7,7 +7,7 @@
 }:
 
 let
-  neovim-pkg = neovim-nightly-overlay.packages.${pkgs.system}.default;
+  neovim-pkg = neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.default;
 in
 {
   # not using the home-manager `programs.neovim` module: it insists on

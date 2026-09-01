@@ -4,21 +4,24 @@
   programs.git = {
     enable = true;
     package = pkgs.unstable.git;
-    userName = "nomnivore";
-    userEmail = "6979410+nomnivore@users.noreply.github.com";
 
-    aliases = {
-      co = "checkout";
-      cm = "commit";
-      st = "status";
-      br = "branch";
-      df = "diff";
-      unstage = "reset HEAD --";
-      last = "log -1 HEAD";
-      undo = "reset --soft HEAD^";
-    };
+    settings = {
+      user = {
+        name = "nomnivore";
+        email = "6979410+nomnivore@users.noreply.github.com";
+      };
 
-    extraConfig = {
+      alias = {
+        co = "checkout";
+        cm = "commit";
+        st = "status";
+        br = "branch";
+        df = "diff";
+        unstage = "reset HEAD --";
+        last = "log -1 HEAD";
+        undo = "reset --soft HEAD^";
+      };
+
       url = {
         "https://github.com/" = {
           insteadOf = "gh:";

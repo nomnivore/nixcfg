@@ -24,8 +24,10 @@ with lib;
     };
 
     xdg.configFile."hypr/hyprpaper.conf".text = ''
-      preload = ${wallpaper}
-      wallpaper = , ${wallpaper}
+      wallpaper {
+        monitor = *
+        path = ${wallpaper}
+      }
     '';
   };
 }

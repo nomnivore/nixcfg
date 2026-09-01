@@ -25,7 +25,7 @@ with lib;
           "$mod, V, togglefloating,"
           "$mod, F, fullscreen,"
           "$mod, P, pseudo," # dwindle
-          "$mod, S, togglesplit," # dwindle
+          "$mod, S, layoutmsg, togglesplit" # dwindle
 
           # move focus with mod + arrows/hjkl
           "$mod, left, movefocus, l"
