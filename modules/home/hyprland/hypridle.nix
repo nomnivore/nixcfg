@@ -16,7 +16,7 @@ with lib;
     ];
 
     wayland.windowManager.hyprland = {
-      settings.exec-once = [ "uwsm app -- hypridle" ];
+      settings.exec-once = [ ];
     };
 
     services.hypridle = {
