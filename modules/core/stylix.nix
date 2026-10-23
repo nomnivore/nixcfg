@@ -44,6 +44,12 @@ with lib;
         name = "catppuccin-mocha-dark-cursors"; # /result/share/icons/???
         size = 24;
       };
+
+      targets = {
+        # loses syntax colors in editors like gedit and gnome-text-editor
+        # but should keep cursors from needing to build inkscape from source (?)
+        gtksourceview.enable = false;
+      };
     };
   };
 }
