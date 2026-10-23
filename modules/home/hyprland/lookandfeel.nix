@@ -23,7 +23,7 @@ with lib;
 
           allow_tearing = "false";
 
-          layout = "dwindle";
+          layout = "scrolling";
         };
 
         misc = {
