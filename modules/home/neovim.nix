@@ -7,7 +7,10 @@
 }:
 
 let
+  # nightly: never in a binary cache, so it compiles locally (~5 min) whenever the input updates
   neovim-pkg = neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  # latest stable release from nixos-unstable, prebuilt on cache.nixos.org; swap with the line above
+  # neovim-pkg = pkgs.unstable.neovim-unwrapped;
 in
 {
   # not using the home-manager `programs.neovim` module: it insists on
